@@ -1,7 +1,5 @@
 package ue01_junit;
 
-import java.util.Arrays;
-
 public class Main {
     public static int count(String s) {
         s = s.replaceAll("<((\".*\")|([^>\"]*))*>", " ");
