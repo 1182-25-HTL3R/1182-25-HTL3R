@@ -1,4 +1,4 @@
-package ue01_junit;
+package firsttry;
 
 public class Main {
     /**
