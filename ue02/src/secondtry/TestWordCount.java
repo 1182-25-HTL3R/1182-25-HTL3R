@@ -56,22 +56,22 @@ public class TestWordCount {
         assert count(" one \"two\"") == 2;
         assert count(" one \"two\" three") == 3;
         assert count(" one \"two\"three") == 3;
-//
-//        // html - trickreich
-//        // Achtung: das ist teilweise nicht ganz legales HTML
-//        assert count(" one<html") == 1; // kein >
-//
-//        assert count(" one<img alt=\"<bild>\" > two") == 2; // <> innerhalb ""
-//        assert count(" one<img alt=\"bild>\" > two") == 2; // <> innerhalb ""
-//        assert count(" one<img alt=\"<bild>\" keinwort> two") == 2;
-//        assert count(" one<img alt=\"<bild>\" src=\"bild.png\" >two") == 2;
-//        assert count(" one<img alt=\"<bild\" keinwort>two") == 2;
-//
-//        assert count(" one<img alt=\"<bild\" keinwort") == 1;
-//        assert count(" one<img alt=\"<bild\" keinwort> two") == 2;
-//        assert count(" one<img alt=\"<bild keinwort> keinwort") == 1;
-//        assert count(" one<img alt=\"<bild keinwort keinwort\">two") == 2;
-//        assert count(" one<img alt=\"<bild keinwort< keinwort\">two") == 2;
+
+        // html - trickreich
+        // Achtung: das ist teilweise nicht ganz legales HTML
+        assert count(" one<html") == 1; // kein >
+
+        assert count(" one<img alt=\"<bild>\" > two") == 2; // <> innerhalb ""
+        assert count(" one<img alt=\"bild>\" > two") == 2; // <> innerhalb ""
+        assert count(" one<img alt=\"<bild>\" keinwort> two") == 2;
+        assert count(" one<img alt=\"<bild>\" src=\"bild.png\" >two") == 2;
+        assert count(" one<img alt=\"<bild\" keinwort>two") == 2;
+
+        assert count(" one<img alt=\"<bild\" keinwort") == 1;
+        assert count(" one<img alt=\"<bild\" keinwort> two") == 2;
+        assert count(" one<img alt=\"<bild keinwort> keinwort") == 1;
+        assert count(" one<img alt=\"<bild keinwort keinwort\">two") == 2;
+        assert count(" one<img alt=\"<bild keinwort< keinwort\">two") == 2;
 //
 //        // ganz ganz fies -- \ entwertet das nächste Zeichen
 //        assert count(" one<img alt=\"<bild \\\" keinwort> keinwort\" keinwort>two") == 2;
