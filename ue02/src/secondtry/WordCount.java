@@ -8,6 +8,8 @@ public class WordCount {
                 if (Character.isLetter(c)) {
                     counter++;
                     return INWORD;
+                } else if (c == '<') {
+                    return TAG;
                 } else {
                     return this;
                 }
@@ -21,6 +23,11 @@ public class WordCount {
                 } else {
                     return this;
                 }
+            }
+        },
+        TAG {
+            State handleChar(char c) {
+                return null;
             }
         };
 
