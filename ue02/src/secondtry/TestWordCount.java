@@ -11,25 +11,25 @@ public class TestWordCount {
         assert count("") == 0;
         assert count(" ") == 0;
         assert count("  ") == 0;
-//
-//        // normal
-//        assert count("one") == 1;
-//        assert count(" one") == 1;
-//        assert count("one ") == 1;
-//        assert count(" one ") == 1;
-//        assert count(" one  ") == 1;
-//        assert count("  one ") == 1;
-//        assert count("  one  ") == 1;
-//
-//        assert count("one:") == 1;
-//        assert count(":one") == 1;
-//        assert count(":one:") == 1;
-//        assert count(" one  ") == 1;
-//        assert count(" one : ") == 1;
-//        assert count(": one :") == 1;
-//        assert count("ein erster Text") == 3;
-//        assert count(" ein  erster   Text      ") == 3;
-//        assert count("ein:erster.Text") == 3;
+
+        // normal
+        assert count("one") == 1;
+        assert count(" one") == 1;
+        assert count("one ") == 1;
+        assert count(" one ") == 1;
+        assert count(" one  ") == 1;
+        assert count("  one ") == 1;
+        assert count("  one  ") == 1;
+
+        assert count("one:") == 1;
+        assert count(":one") == 1;
+        assert count(":one:") == 1;
+        assert count(" one  ") == 1;
+        assert count(" one : ") == 1;
+        assert count(": one :") == 1;
+        assert count("ein erster Text") == 3;
+        assert count(" ein  erster   Text      ") == 3;
+        assert count("ein:erster.Text") == 3;
 //
 //        // vielleicht falsch
 //        assert count("a") == 1;
