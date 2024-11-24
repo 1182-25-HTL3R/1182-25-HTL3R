@@ -30,12 +30,12 @@ public class TestWordCount {
         assert count("ein erster Text") == 3;
         assert count(" ein  erster   Text      ") == 3;
         assert count("ein:erster.Text") == 3;
-//
-//        // vielleicht falsch
-//        assert count("a") == 1;
-//        assert count(" a") == 1;
-//        assert count("a ") == 1;
-//        assert count(" a ") == 1;
+
+        // vielleicht falsch
+        assert count("a") == 1;
+        assert count(" a") == 1;
+        assert count("a ") == 1;
+        assert count(" a ") == 1;
 //
 //        // mit html
 //        assert count(" one  <html> ") == 1;
