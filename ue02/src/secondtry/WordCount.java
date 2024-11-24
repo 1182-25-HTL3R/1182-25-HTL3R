@@ -18,7 +18,7 @@ public class WordCount {
         INWORD {
             @Override
             State handleChar(char c) {
-                if (! Character.isLetter(c)) {
+                if (!Character.isLetter(c)) {
                     return NOWORD;
                 } else {
                     return this;
@@ -26,13 +26,27 @@ public class WordCount {
             }
         },
         TAG {
+            @Override
+            State handleChar(char c) {
+                if (c == '\"') {
+                    return ALTTEXT;
+                } else if (c == '>') {
+                    return NOWORD;
+                }
+                else {
+                    return this;
+                }
+            }
+        },
+        ALTTEXT {
+            @Override
             State handleChar(char c) {
                 return null;
             }
         };
 
         abstract State handleChar(char c);
-    }
+        }
 
     public static int counter = 0;
 
