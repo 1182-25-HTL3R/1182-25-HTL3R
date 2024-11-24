@@ -36,26 +36,26 @@ public class TestWordCount {
         assert count(" a") == 1;
         assert count("a ") == 1;
         assert count(" a ") == 1;
-//
-//        // mit html
-//        assert count(" one  <html> ") == 1;
-//        assert count(" one  < html> ") == 1;
-//        assert count(" one  <html > ") == 1;
-//        assert count(" one  < html > ") == 1;
-//        assert count(" one <html> two<html>three <html> four") == 4;
-//
-//        assert count(" one <html> two ") == 2;
-//        assert count(" one <html>two ") == 2;
-//        assert count(" one<html> two ") == 2;
-//        assert count(" one<html>two ") == 2;
-//        assert count(" one<img alt=\"xxx\" > two") == 2;
-//        assert count(" one<img alt=\"xxx yyy\" > two") == 2;
-//
-//        assert count(" one \"two\" ") == 2;
-//        assert count(" one\"two\" ") == 2;
-//        assert count(" one \"two\"") == 2;
-//        assert count(" one \"two\" three") == 3;
-//        assert count(" one \"two\"three") == 3;
+
+        // mit html
+        assert count(" one  <html> ") == 1;
+        assert count(" one  < html> ") == 1;
+        assert count(" one  <html > ") == 1;
+        assert count(" one  < html > ") == 1;
+        assert count(" one <html> two<html>three <html> four") == 4;
+
+        assert count(" one <html> two ") == 2;
+        assert count(" one <html>two ") == 2;
+        assert count(" one<html> two ") == 2;
+        assert count(" one<html>two ") == 2;
+        assert count(" one<img alt=\"xxx\" > two") == 2;
+        assert count(" one<img alt=\"xxx yyy\" > two") == 2;
+
+        assert count(" one \"two\" ") == 2;
+        assert count(" one\"two\" ") == 2;
+        assert count(" one \"two\"") == 2;
+        assert count(" one \"two\" three") == 3;
+        assert count(" one \"two\"three") == 3;
 //
 //        // html - trickreich
 //        // Achtung: das ist teilweise nicht ganz legales HTML
