@@ -72,12 +72,12 @@ public class TestWordCount {
         assert count(" one<img alt=\"<bild keinwort> keinwort") == 1;
         assert count(" one<img alt=\"<bild keinwort keinwort\">two") == 2;
         assert count(" one<img alt=\"<bild keinwort< keinwort\">two") == 2;
-//
-//        // ganz ganz fies -- \ entwertet das nächste Zeichen
-//        assert count(" one<img alt=\"<bild \\\" keinwort> keinwort\" keinwort>two") == 2;
-//        assert count(" one<img alt=\"<bild \\\" keinwort<keinwort\" keinwort>two") == 2;
-//        assert count(" one<img alt=\"<bild \\\" keinwort keinwort\" keinwort>two") == 2;
-//
-//        assert count(" \\\"null\\\" one<img alt=\"<bild \\\" keinwort keinwort\" keinwort>two \"three\"") == 4;
+
+        // ganz ganz fies -- \ entwertet das nächste Zeichen
+        assert count(" one<img alt=\"<bild \\\" keinwort> keinwort\" keinwort>two") == 2;
+        assert count(" one<img alt=\"<bild \\\" keinwort<keinwort\" keinwort>two") == 2;
+        assert count(" one<img alt=\"<bild \\\" keinwort keinwort\" keinwort>two") == 2;
+
+        assert count(" \\\"null\\\" one<img alt=\"<bild \\\" keinwort keinwort\" keinwort>two \"three\"") == 4;
     }
 }
