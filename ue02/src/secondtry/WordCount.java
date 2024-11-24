@@ -42,11 +42,20 @@ public class WordCount {
         ALTTEXT {
             @Override
             State handleChar(char c) {
+                if (c == '\\') {
+                    return BACKSLASH_ALTTEXT;
+                }
                 if (c == '\"') {
                     return TAG;
                 } else {
                     return this;
                 }
+            }
+        },
+        BACKSLASH_ALTTEXT {
+            @Override
+            State handleChar(char c) {
+                return ALTTEXT;
             }
         };
 
