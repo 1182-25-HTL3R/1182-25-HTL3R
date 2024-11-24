@@ -1,9 +1,18 @@
+/**
+ * @author Fabian Ha
+ * class: 4CN
+ * date: 24.11.2024
+ * program: TestWordCount
+ */
 package secondtry;
 
 import org.junit.jupiter.api.Test;
 import static secondtry.WordCount.count;
 
 public class TestWordCount {
+    /**
+     * Testet die Methode count von WordCount.
+     */
     @Test
     public void testCount() {
         assert count("") == 0;
