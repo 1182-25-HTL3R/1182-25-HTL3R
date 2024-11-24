@@ -1,6 +1,7 @@
 package secondtry;
 
 import org.junit.jupiter.api.Test;
+import static secondtry.WordCount.count;
 
 public class TestWordCount {
     @Test
