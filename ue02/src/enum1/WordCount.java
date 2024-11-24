@@ -23,7 +23,11 @@ public class WordCount {
         INWORD {
             @Override
             State handleChar(char c, WordCount context) {
-                return null;
+                if (! Character.isLetter(c)) {
+                    return NOWORD;
+                } else {
+                    return this;
+                }
             }
         };
 
