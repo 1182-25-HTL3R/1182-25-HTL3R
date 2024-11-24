@@ -1,3 +1,9 @@
+/**
+ * @author Fabian Ha
+ * class: 4CN
+ * date: 24.11.2024
+ * program: WordCount
+ */
 package secondtry;
 
 public class WordCount {
@@ -62,8 +68,16 @@ public class WordCount {
         abstract State handleChar(char c);
     }
 
+    /**
+     * Globaler Zähler für die Anzahl der Wörter.
+     */
     public static int counter = 0;
 
+    /**
+     * Zählt die Anzahl der Wörter im String text.
+     * @param text String von welchem die Anzahl der Wörter ermittelt wird
+     * @return Anzahl der Wörter
+     */
     public static int count(String text) {
         State state = State.NOWORD;
         counter = 0;
