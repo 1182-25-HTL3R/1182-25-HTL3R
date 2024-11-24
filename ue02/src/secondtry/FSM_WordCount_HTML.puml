@@ -4,12 +4,15 @@ scale 350 width
 [*] --> NoWord
 NoWord --> Word: Letter
 NoWord --> NoWord: Other
-Word --> NoWord: NoLetter; counter++
+Word --> NoWord: Other; counter++
 Word --> Word: Letter
+Word --> Tag: <
 NoWord --> Tag: <
 Tag --> NoWord: >
 Tag --> Tag: Other
 Tag --> AltText: "
 AltText --> Tag: "
-AltText --> AltText: No "
+AltText --> AltText: other
+AltText --> Backslash_Alttext: \\
+Backslash_Alttext --> AltText
 @enduml
