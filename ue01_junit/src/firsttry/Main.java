@@ -14,4 +14,8 @@ public class Main {
         if (s.isEmpty()) return 0;
         return s.split(" ").length;
     }
+
+    public static void main(String[] args) {
+
+    }
 }

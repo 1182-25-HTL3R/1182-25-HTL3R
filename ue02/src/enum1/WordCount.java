@@ -1,3 +1,10 @@
+/**
+ * @author Fabian Ha
+ * class: 4CN
+ * date: 11.11.2024
+ * program: WordCount
+ */
+
 package enum1;
 
 public class WordCount {
@@ -9,7 +16,7 @@ public class WordCount {
                     context.counter++;
                     return INWORD;
                 } else {
-                    return NOWORD; // oder: return this;
+                    return this;
                 }
             }
         },
