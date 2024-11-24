@@ -18,7 +18,9 @@ public class WordCount {
         INWORD {
             @Override
             State handleChar(char c) {
-                if (!Character.isLetter(c)) {
+                if (c == '<') {
+                    return TAG;
+                } else if (!Character.isLetter(c)) {
                     return NOWORD;
                 } else {
                     return this;
