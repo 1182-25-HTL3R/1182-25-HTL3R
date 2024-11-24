@@ -32,8 +32,7 @@ public class WordCount {
                     return ALTTEXT;
                 } else if (c == '>') {
                     return NOWORD;
-                }
-                else {
+                } else {
                     return this;
                 }
             }
@@ -41,12 +40,16 @@ public class WordCount {
         ALTTEXT {
             @Override
             State handleChar(char c) {
-                return null;
+                if (c == '\"') {
+                    return TAG;
+                } else {
+                    return this;
+                }
             }
         };
 
         abstract State handleChar(char c);
-        }
+    }
 
     public static int counter = 0;
 
