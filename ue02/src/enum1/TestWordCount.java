@@ -9,6 +9,6 @@ public class TestWordCount {
     public void testCount() throws IOException {
         WordCount wc = new WordCount();
         wc.count(String.valueOf(Files.readAllLines(Path.of("C:\\Users\\fabia\\IdeaProjects\\SEW4_SEM1\\ue02\\src\\enum1\\crsto12.html"))));
-        assert wc.counter == 48125; // Mitschüler gefragt nach der Anzahl
+        assert wc.counter == 482515; // Mitschüler gefragt nach der Anzahl
     }
 }
