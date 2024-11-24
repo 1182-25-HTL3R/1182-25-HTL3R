@@ -5,7 +5,7 @@
  * program: WordCount
  */
 
-package enum1;
+package wordcount;
 
 public class WordCount {
     enum State {

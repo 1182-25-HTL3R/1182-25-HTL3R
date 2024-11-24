@@ -1,4 +1,4 @@
-package enum1;
+package wordcount;
 
 import java.io.IOException;
 import java.nio.file.Files;
