@@ -4,9 +4,9 @@ public class WordCount {
     enum State {
         NOWORD {
             @Override
-            State handleChar(char c, WordCount context) {
+            State handleChar(char c) {
                 if (Character.isLetter(c)) {
-                    context.counter++;
+                    counter++;
                     return INWORD;
                 } else {
                     return this;
@@ -15,7 +15,7 @@ public class WordCount {
         },
         INWORD {
             @Override
-            State handleChar(char c, WordCount context) {
+            State handleChar(char c) {
                 if (! Character.isLetter(c)) {
                     return NOWORD;
                 } else {
@@ -24,16 +24,16 @@ public class WordCount {
             }
         };
 
-        abstract State handleChar(char c, WordCount context);
+        abstract State handleChar(char c);
     }
 
-    int counter;
+    public static int counter = 0;
 
-    public int count(String text) {
+    public static int count(String text) {
         State state = State.NOWORD;
         counter = 0;
         for (char c : text.toCharArray()) {
-            state = state.handleChar(c, this);
+            state = state.handleChar(c);
         }
         return counter;
     }
