@@ -1,0 +1,17 @@
+/'
+author: Fabian Ha
+class: 4CN
+date: 05.12.2024
+program: FSM_CSVReader
+'/
+
+@startuml
+'https://plantuml.com/state-diagram
+
+scale 500 width
+[*] --> Zeichen: s = ""\narr = new ArrayList<>();
+Zeichen --> Zeichen: Zeichen ist ','; arr.add(s); s="";\t
+Zeichen --> Zeichen: Zeichen ist kein ','; s+=Zeichen;
+Zeichen --> [*]: System.out.println(arr.toArray());
+
+@enduml
