@@ -12,6 +12,6 @@ scale 500 width
 [*] --> Zeichen: s = ""\narr = new ArrayList<>();
 Zeichen --> Zeichen: Zeichen ist ','; arr.add(s); s="";\t
 Zeichen --> Zeichen: Zeichen ist kein ','; s+=Zeichen;
-Zeichen --> [*]: System.out.println(arr.toArray());
+Zeichen --> [*]: arr.add(s);\nreturn arr.toArray();
 
 @enduml
