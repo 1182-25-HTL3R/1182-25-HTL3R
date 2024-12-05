@@ -8,13 +8,40 @@
 package csv;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CSVReader {
+    public static ArrayList<String> words = new ArrayList<>();
+    public static String word = "";
+
+    enum State {
+        ZEICHEN {
+            @Override
+            State handleChar(char ch) {
+                if (ch == ',') {
+                    words.add(word);
+                    word = "";
+                } else {
+                    word += ch;
+                }
+
+                return this;
+            }
+        };
+
+        abstract State handleChar(char ch);
+    }
+
+    public static String[] getWords(String s) {
+        State ZEICHEN = State.ZEICHEN;
+        for (char ch : s.toCharArray()) {
+            ZEICHEN = ZEICHEN.handleChar(ch);
+        }
+        words.add(word);
+        return words.toArray(new String[0]);
+    }
 
     public static void main(String[] args) {
-        ArrayList<String> abc = new ArrayList<>();
-        abc.add("bfesaf");
-        abc.toArray();
-
+        System.out.println(Arrays.toString(getWords("lsjef,aesfjlasfe,19821ü")));
     }
 }
