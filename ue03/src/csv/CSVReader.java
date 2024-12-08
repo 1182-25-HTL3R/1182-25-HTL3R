@@ -11,59 +11,63 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CSVReader {
-    public static ArrayList<String> words = new ArrayList<>();
-    public static String word = "";
+    private ArrayList<String> words;
+    private String word;
+    private char delimiter;
+    private char doublequote;
+    private boolean skipinitialspace;
+
+    public CSVReader(char delimiter, char doublequote, boolean skipinitialspace) {
+        this.delimiter = delimiter;
+        this.doublequote = doublequote;
+        this.skipinitialspace = skipinitialspace;
+        this.words = new ArrayList<>();
+        this.word = "";
+    }
 
     enum State {
         WHITESPACE {
-            State handleChar(char ch) {
-                if (Character.isWhitespace(ch)) {
+            State handleChar(char ch, CSVReader reader) {
+                if (reader.skipinitialspace && Character.isWhitespace(ch)) {
                     return WHITESPACE;
-                } else if (ch == ',') {
-                    words.add(word);
-                    word = "";
-                    return WHITESPACE;
-                } else if (ch == '"') {
-                    return INSTRING;
                 } else {
-                    word += ch;
-                    return ZEICHEN;
+                    return State.ZEICHEN.handleChar(ch, reader);
                 }
             }
         },
         ZEICHEN {
             @Override
-            State handleChar(char ch) {
-                if (ch == ',') {
-                    words.add(word);
-                    word = "";
+            State handleChar(char ch, CSVReader reader) {
+                if (ch == reader.delimiter) {
+                    reader.words.add(reader.word);
+                    reader.word = "";
                     return WHITESPACE;
-                } else if (ch == '"') {
+                } else if (ch == reader.doublequote) {
                     return INSTRING;
                 } else {
-                    word += ch;
+                    reader.word += ch;
                     return ZEICHEN;
                 }
             }
         },
         INSTRING {
-            State handleChar(char ch) {
-                if (ch == '"') {
+            State handleChar(char ch, CSVReader reader) {
+                if (ch == reader.doublequote) {
                     return AFTERSTRING;
                 }
 
-                word += ch;
+                reader.word += ch;
                 return INSTRING;
             }
         },
         AFTERSTRING {
-            State handleChar(char ch) {
-                if (ch == ',') {
-                    words.add(word);
-                    word = "";
+            State handleChar(char ch, CSVReader reader) {
+                if (ch == reader.delimiter) {
+                    reader.words.add(reader.word);
+                    reader.word = "";
                     return WHITESPACE;
-                } else if (ch == '"') {
-                    word += "\"";
+                } else if (ch == reader.doublequote) {
+                    reader.word += reader.doublequote;
                     return INSTRING;
                 }
 
@@ -71,15 +75,15 @@ public class CSVReader {
             }
         };
 
-        abstract State handleChar(char ch);
+        abstract State handleChar(char ch, CSVReader reader);
     }
 
-    public static String[] getWords(String s) {
+    public String[] getWords(String s) {
         word = "";
         words = new ArrayList<>();
         State st = State.WHITESPACE;
         for (char ch : s.toCharArray()) {
-            st = st.handleChar(ch);
+            st = st.handleChar(ch, this);
         }
 
         if (st == State.INSTRING) {
@@ -91,6 +95,7 @@ public class CSVReader {
     }
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(getWords("\"uno\",dos")));
+        CSVReader reader = new CSVReader(',', '"', false);
+        System.out.println(Arrays.toString(reader.getWords("\"uno\",dos")));
     }
 }
