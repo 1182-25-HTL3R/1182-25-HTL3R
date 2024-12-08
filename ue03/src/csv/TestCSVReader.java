@@ -40,9 +40,10 @@ public class TestCSVReader {
 
         // B6
         try (
-            CSVFileReader reader3 = new CSVFileReader("file.csv", ';', '\"', true)) {
+            CSVFileReader reader3 = new CSVFileReader("C:\\Users\\fabia\\IdeaProjects\\SEW4_SEM1\\ue03\\src\\csv\\file.csv", ';', '\"', true)) {
             assert Arrays.equals(reader3.next(), new String[]{"", "A", "B", "C", "D", "E", "F", "G", "H"});
             assert Arrays.equals(reader3.next(), new String[]{"A", "", "4", "7", "8", "", "", "", ""});
+            assert Arrays.equals(reader3.next(), new String[]{"B", "4", "", "", "", "5", "3", "", ""});
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
