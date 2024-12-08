@@ -13,5 +13,12 @@ scale 500 width
 Zeichen --> Zeichen: Zeichen ist ','; arr.add(s); s="";\t
 Zeichen --> Zeichen: Zeichen ist kein ','; s+=Zeichen;
 Zeichen --> [*]: arr.add(s);\nreturn arr.toArray();
+Zeichen --> InString: Zeichen ist "
+InString --> InString: kein "\ns+=Zeichen
+InString --> [*]: throw IllegalArgumentException
+InString --> AfterString: Zeichen ist  "
+AfterString --> Zeichen: Zeichen ist ','\narr.add(s)\ns=""
+AfterString --> [*]: arr.add(s);\nreturn arr.toArray();
+AfterString --> [*]: Zeichen ist kein ','\nthrow IllegalArgumentException
 
 @enduml

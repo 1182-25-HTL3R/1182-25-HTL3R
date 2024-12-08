@@ -8,7 +8,6 @@
 package csv;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class CSVReader {
     public static ArrayList<String> words = new ArrayList<>();
