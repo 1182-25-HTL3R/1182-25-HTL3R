@@ -20,11 +20,22 @@ public class CSVReader {
                 if (ch == ',') {
                     words.add(word);
                     word = "";
-                } else {
+                } if (ch == '"') {
+                    return INSTRING;
+                }else {
                     word += ch;
                 }
 
                 return this;
+            }
+        },
+        INSTRING {
+            State handleChar(char ch) {
+                if (ch == '"') {
+                    word += ch;
+                    return INSTRING;
+                }
+                return AFTERSTRING;
             }
         };
 
