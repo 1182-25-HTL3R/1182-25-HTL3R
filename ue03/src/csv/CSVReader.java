@@ -33,6 +33,8 @@ public class CSVReader {
     }
 
     public static String[] getWords(String s) {
+        word = "";
+        words = new ArrayList<>();
         State ZEICHEN = State.ZEICHEN;
         for (char ch : s.toCharArray()) {
             ZEICHEN = ZEICHEN.handleChar(ch);
@@ -42,6 +44,6 @@ public class CSVReader {
     }
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(getWords("lsjef,aesfjlasfe,19821ü")));
+        System.out.println(Arrays.toString(getWords("abc,def123+#+sdaf,ghi")));
     }
 }
