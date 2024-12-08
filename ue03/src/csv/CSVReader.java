@@ -20,9 +20,9 @@ public class CSVReader {
                 if (ch == ',') {
                     words.add(word);
                     word = "";
-                } if (ch == '"') {
+                } else if (ch == '"') {
                     return INSTRING;
-                }else {
+                } else {
                     word += ch;
                 }
 
