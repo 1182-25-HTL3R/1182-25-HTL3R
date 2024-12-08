@@ -17,6 +17,12 @@ public class CSVReader {
     private char doublequote;
     private boolean skipinitialspace;
 
+    /**
+     * Konstruktor für CSV Leser, der Wörter aus einem String liest, mit Optinen wie delimiter, doublequote und skipinitialspace
+     * @param delimiter Trennzeichen zwischen Wörter
+     * @param doublequote Stringbegrenzer in Wörtern
+     * @param skipinitialspace Option, ob Whitespaces übersprungen werden sollen oder nicht
+     */
     public CSVReader(char delimiter, char doublequote, boolean skipinitialspace) {
         this.delimiter = delimiter;
         this.doublequote = doublequote;
@@ -75,9 +81,20 @@ public class CSVReader {
             }
         };
 
+        /**
+         * Methode um je ein Zeichen zu behandeln
+         * @param ch Character der zu behandeln ist
+         * @param reader CSVReader Objekt
+         * @return nächster State
+         */
         abstract State handleChar(char ch, CSVReader reader);
     }
 
+    /**
+     * Methode um Wörter aus einem String zu bekommen
+     * @param s String mit Wörtern
+     * @return String Array aller Worte
+     */
     public String[] getWords(String s) {
         word = "";
         words = new ArrayList<>();

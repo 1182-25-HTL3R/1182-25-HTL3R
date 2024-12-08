@@ -3,12 +3,14 @@ package csv;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
 public class TestCSVReader {
+    /**
+     * Tests für die getWords Methode von CSVReader und CSVFileReader
+     */
     @Test
     public void testGetWords() {
         CSVReader reader = new CSVReader(',', '"', true);
