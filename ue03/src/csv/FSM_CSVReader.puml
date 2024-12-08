@@ -18,7 +18,7 @@ InString --> InString: kein "\ns+=Zeichen
 InString --> [*]: throw IllegalArgumentException
 InString --> AfterString: Zeichen ist "
 AfterString --> Zeichen: Zeichen ist ','\narr.add(s)\ns=""
-AfterString --> InString: Zeichen ist "
+AfterString --> InString: Zeichen ist "\ns+=\"
 AfterString --> [*]: arr.add(s);\nreturn arr.toArray();
 AfterString --> [*]: Zeichen ist kein ','\nthrow IllegalArgumentException
 
