@@ -22,5 +22,9 @@ public class TestCSVReader {
             CSVReader.getWords("\"hallo");
         });
 
+        // B3
+        assert Arrays.equals(CSVReader.getWords("\"ein,s\",\"zw\"\"ei\",drei"), new String[]{"ein,s", "zw\"ei", "drei"});
+        assert Arrays.equals(CSVReader.getWords("\"\"\"ein,s\"\"\""), new String[]{"\"ein,s\""});
+
     }
 }
