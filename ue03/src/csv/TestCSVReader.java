@@ -26,5 +26,8 @@ public class TestCSVReader {
         assert Arrays.equals(CSVReader.getWords("\"ein,s\",\"zw\"\"ei\",drei"), new String[]{"ein,s", "zw\"ei", "drei"});
         assert Arrays.equals(CSVReader.getWords("\"\"\"ein,s\"\"\""), new String[]{"\"ein,s\""});
 
+        // B4
+        assert Arrays.equals(CSVReader.getWords("    \"ab,cd\""), new String[]{"ab,cd"});
+        assert Arrays.equals(CSVReader.getWords("    \"ab,cd\",     efg"), new String[]{"ab,cd", "efg"});
     }
 }
