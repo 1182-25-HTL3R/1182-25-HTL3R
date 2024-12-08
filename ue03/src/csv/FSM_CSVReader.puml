@@ -8,16 +8,18 @@ program: FSM_CSVReader
 @startuml
 'https://plantuml.com/state-diagram
 
-scale 500 width
-[*] --> Zeichen: s = ""\narr = new ArrayList<>();
-Zeichen --> Zeichen: Zeichen ist ','; arr.add(s); s="";\t
+scale 800 width
+[*] --> Whitespace: s = ""\narr = new ArrayList<>();
+Whitespace --> Whitespace: Zeichen ist Leerzeichen oder Tabulator
+Whitespace --> Zeichen: Zeichen ist kein Leerzeichen oder Tabulator
+Zeichen --> Whitespace: Zeichen ist ','; arr.add(s); s="";\t
 Zeichen --> Zeichen: Zeichen ist kein ','; s+=Zeichen;
 Zeichen --> [*]: arr.add(s);\nreturn arr.toArray();
 Zeichen --> InString: Zeichen ist "
 InString --> InString: kein "\ns+=Zeichen
 InString --> [*]: throw IllegalArgumentException
 InString --> AfterString: Zeichen ist "
-AfterString --> Zeichen: Zeichen ist ','\narr.add(s)\ns=""
+AfterString --> Whitespace: Zeichen ist ','\narr.add(s)\ns=""
 AfterString --> InString: Zeichen ist "\ns+=\"
 AfterString --> [*]: arr.add(s);\nreturn arr.toArray();
 AfterString --> [*]: Zeichen ist kein ','\nthrow IllegalArgumentException
