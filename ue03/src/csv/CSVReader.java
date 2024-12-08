@@ -42,8 +42,4 @@ public class CSVReader {
         words.add(word);
         return words.toArray(new String[0]);
     }
-
-    public static void main(String[] args) {
-        System.out.println(Arrays.toString(getWords("abc,def123+#+sdaf,ghi")));
-    }
 }
