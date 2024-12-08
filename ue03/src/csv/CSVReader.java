@@ -46,6 +46,7 @@ public class CSVReader {
                     word = "";
                     return ZEICHEN;
                 } else if (ch == '"') {
+                    word += "\"";
                     return INSTRING;
                 }
 
