@@ -32,10 +32,24 @@ public class CSVReader {
         INSTRING {
             State handleChar(char ch) {
                 if (ch == '"') {
-                    word += ch;
+                    return AFTERSTRING;
+                }
+
+                word += ch;
+                return INSTRING;
+            }
+        },
+        AFTERSTRING {
+            State handleChar(char ch) {
+                if (ch == ',') {
+                    words.add(word);
+                    word = "";
+                    return ZEICHEN;
+                } else if (ch == '"') {
                     return INSTRING;
                 }
-                return AFTERSTRING;
+
+                throw new IllegalArgumentException();
             }
         };
 
@@ -45,10 +59,15 @@ public class CSVReader {
     public static String[] getWords(String s) {
         word = "";
         words = new ArrayList<>();
-        State ZEICHEN = State.ZEICHEN;
+        State st = State.ZEICHEN;
         for (char ch : s.toCharArray()) {
-            ZEICHEN = ZEICHEN.handleChar(ch);
+            st = st.handleChar(ch);
         }
+
+        if (st == State.INSTRING) {
+            throw new IllegalArgumentException();
+        }
+
         words.add(word);
         return words.toArray(new String[0]);
     }
