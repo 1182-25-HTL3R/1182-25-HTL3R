@@ -3,6 +3,8 @@ package csv;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class TestCSVReader {
@@ -31,8 +33,18 @@ public class TestCSVReader {
         assert Arrays.equals(reader.getWords("    \"ab,cd\""), new String[]{"ab,cd"});
         assert Arrays.equals(reader.getWords("    \"ab,cd\",     efg"), new String[]{"ab,cd", "efg"});
 
+        // B5
         CSVReader reader2 = new CSVReader('#', '+', false);
         assert Arrays.equals(reader2.getWords("   one#two#t+hree+"), new String[]{"   one", "two", "three"});
         assert Arrays.equals(reader2.getWords("abc##+def123sdaf+#ghi"), new String[]{"abc", "", "def123sdaf", "ghi"});
+
+        // B6
+        try (
+            CSVFileReader reader3 = new CSVFileReader("file.csv", ';', '\"', true)) {
+            assert Arrays.equals(reader3.next(), new String[]{"", "A", "B", "C", "D", "E", "F", "G", "H"});
+            assert Arrays.equals(reader3.next(), new String[]{"A", "", "4", "7", "8", "", "", "", ""});
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
