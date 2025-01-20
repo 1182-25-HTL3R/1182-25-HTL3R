@@ -53,9 +53,12 @@ def to_base (number: int, base: int) -> str:
     :param number: Zahl im 10er-System
     :param base: Zielsystem (maximal 36)
     :return: Zahl im Zielsystem als String
+
+    >>> to_base(1234, 16)
+    '4D2'
     """
 
-    list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+    list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     s = ""
 
     while number > 0:
@@ -65,5 +68,28 @@ def to_base (number: int, base: int) -> str:
 
     return s
 
+def get_dec_hex_palindrom(x: int) -> int:
+    """
+    gibt die größe Zahl (kleiner als x) zurück, die im Dezimalsystem als auch im Hexadezimalsystem ein Palindrom ist
+    :param x: Zahl im 10er-System
+    :return: größte Zahl die im Dezimalsystem und im Hexadezimalsystem ein Palindrom ist
+    """
+
+    for num in range(x-1, 0, -1):
+        if is_palindrom(str(to_base(num, 16))) and is_palindrom(str(num)):
+            return num
+
+    return -1
+
 if __name__ == '__main__':
-    print(is_palindrom('abcddcb'))
+    assert is_palindrom('fabiannaibAf') == True
+    assert is_palindrom('fabiannaib') == False
+
+    assert is_palindrom_sentence('ich liebe sew wes ebeil hci!!!') == True
+    assert is_palindrom_sentence('ich liebe sew we ebeil hci!!!') == False
+
+    assert palindrom_product(8000000) == 906609
+    assert palindrom_product(800000) == 793397
+
+    assert get_dec_hex_palindrom(2000) == 1991
+    assert get_dec_hex_palindrom(400) == 353
