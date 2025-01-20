@@ -47,5 +47,23 @@ def palindrom_product(x: int) -> int:
 
     return biggest_pal
 
+def to_base (number: int, base: int) -> str:
+    """
+    converts number to other base
+    :param number: Zahl im 10er-System
+    :param base: Zielsystem (maximal 36)
+    :return: Zahl im Zielsystem als String
+    """
+
+    list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+    s = ""
+
+    while number > 0:
+        x = list[number%base]
+        number = number//base
+        s = x + s
+
+    return s
+
 if __name__ == '__main__':
     print(is_palindrom('abcddcb'))
