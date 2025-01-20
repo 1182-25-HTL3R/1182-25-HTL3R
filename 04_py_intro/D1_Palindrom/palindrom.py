@@ -1,6 +1,6 @@
 """
 Class: 4CN
-Program UE04_Python_Intro
+Program UE04_Python_Intro - Palindrom
 """
 __author__ = "Fabian Ha"
 
