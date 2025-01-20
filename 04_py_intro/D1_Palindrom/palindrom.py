@@ -27,5 +27,25 @@ def is_palindrom_sentence(s:str) -> bool:
 
     return is_palindrom(s2)
 
+
+def palindrom_product(x: int) -> int:
+    """
+    creates the biggest palindrom number out of two 3-digit numbers that are smaller than x
+    :param x: the highest number for a palindrom
+    :return: the biggest palindrom number out of two 3-digit numbers that are smaller than x
+    """
+
+    biggest_pal = 0
+
+    for a in range (999, 99, -1):
+        for b in range (999, 99, -1):
+            product = a * b
+            if product >= x:
+                continue
+            if is_palindrom(str(product)) and product > biggest_pal:
+                biggest_pal = product
+
+    return biggest_pal
+
 if __name__ == '__main__':
     print(is_palindrom('abcddcb'))
