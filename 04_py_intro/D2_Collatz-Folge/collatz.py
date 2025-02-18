@@ -16,6 +16,21 @@ def collatz(n: int) -> int:
         return int(n / 2)
     return 3 * n + 1
 
+def collatz_sequence(number: int, output: list = []) -> list[int]:
+    """
+    Gibt die Collatz Reihenfolge als Liste zurück
+    :param number: Int-Startwert
+    :param output: Liste der Collatz-Werte
+    :return: Collatz Reihenfolge als Liste
+    """
+
+    if number == 1:
+        return output
+
+    next_value = collatz(number)
+    output += next_value
+    collatz_sequence(next_value, output)
+
 
 if __name__ == "__main__":
     assert(collatz(11) == 34)
