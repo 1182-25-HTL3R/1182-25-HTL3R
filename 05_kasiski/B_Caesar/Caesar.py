@@ -1,3 +1,9 @@
+"""
+Class: 4CN
+Program UE05_Python_Kasiski - Caesar
+"""
+__author__ = "Fabian Ha"
+
 import re, doctest
 from typing import List
 
@@ -10,8 +16,12 @@ class Caesar:
 
     @staticmethod
     def to_lowercase_letter_only(plaintext: str) -> str:
-        """Wandelt den plaintext in Kleinbuchstaben um und entfernt alle Zeichen, die keine
+        """
+        Wandelt den plaintext in Kleinbuchstaben um und entfernt alle Zeichen, die keine
         Kleinbuchstaben aus dem Bereich [a..z] sind.
+        :param plaintext: roh Text
+        :return: lowercase letter only Text
+
         >>> caesar = Caesar()
         >>> caesar.to_lowercase_letter_only("Wandelt den plaintext in Kleinbuchstaben um und entfernt alle Zeichen, die keine Kleinbuchstaben aus dem Bereich [a..z] sind.")
         'wandeltdenplaintextinkleinbuchstabenumundentferntallezeichendiekeinekleinbuchstabenausdembereichazsind'
@@ -25,8 +35,13 @@ class Caesar:
         return re.compile('[^a-z]').sub('', plaintext)
 
     def encrypt(self, plaintext: str, key: str = None) -> str:
-        """key ist ein Buchstabe, der definiert, um wieviele Zeichen verschoben wird.
-        Falls kein key übergeben wird, nimmt übernimmt encrypt den Wert vom Property.
+        """
+        verschlüsselt den plaintext mit der Caesar-Chiffre mit key als Schlüssel
+
+        :param plaintext: roh Text
+        :param key: key ist ein Buchstabe, der definiert, um wieviele Zeichen verschoben wird. Falls kein key übergeben wird, nimmt übernimmt encrypt den Wert vom Property.
+        :return: verschlüsselten Text
+
         >>> caesar=Caesar("b")
         >>> caesar.key
         'b'
@@ -59,8 +74,13 @@ class Caesar:
         return encrypted
 
     def decrypt(self, crypttext: str, key: str = None) -> str:
-        """key ist ein Buchstabe, der definiert, um wieviele Zeichen zurückverschoben wird.
-        Falls kein key übergeben wird, nimmt übernimmt decrypt den Wert vom Property.
+        """
+        entschlüsselt den crypttext mit der Caesar-Chiffre mit key als Schlüssel
+
+        :param crypttext: verschlüsselter Text
+        :param key: key ist ein Buchstabe, der definiert, um wieviele Zeichen zurückverschoben wird. Falls kein key übergeben wird, nimmt übernimmt decrypt den Wert vom Property.
+        :return: entschlüsselter Text
+
         >>> caesar = Caesar("b")
         >>> caesar.decrypt("ibmmp")
         'hallo'
@@ -91,6 +111,12 @@ class Caesar:
 
     def crack(self, crypttext: str, elements: int = 1) -> List[str]:
         """
+        berechnet eine Liste mit den wahrscheinlichsten Schlüsseln
+
+        :param crypttext: verschlüsselter Text
+        :param elements: gibt die Länge der Liste vor
+        :return: wahrscheinlichste Schlüssel
+
         >>> text='Vor einem großen Walde wohnte ein armer Holzhacker mit seiner Frau und seinen zwei Kindern; das Bübchen hieß Hänsel und das Mädchen Gretel. Er hatte wenig zu beißen und zu brechen, und einmal, als große Teuerung ins Land kam, konnte er das tägliche Brot nicht mehr schaffen. Wie er sich nun abends im Bette Gedanken machte und sich vor Sorgen herumwälzte, seufzte er und sprach zu seiner Frau: "Was soll aus uns werden? Wie können wir unsere armen Kinder ernähren da wir für uns selbst nichts mehr haben?"'
         >>> caesar = Caesar()
         >>> caesar.crack(text)
@@ -105,6 +131,7 @@ class Caesar:
         crypttext = self.to_lowercase_letter_only(crypttext)
         haeufigste = dict()
         alphabet = "abcdefghijklmnopqrstuvwxyz"
+
         for i in alphabet:
             count = crypttext.count(i)
             if count != 0: haeufigste[i] = count
