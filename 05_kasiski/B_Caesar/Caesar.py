@@ -57,7 +57,7 @@ class Caesar:
 
     def decrypt(self, crypttext:str, key:str = None) -> str:
         """key ist ein Buchstabe, der definiert, um wieviele Zeichen zurückverschoben wird.
-        Falls kein key übergeben wird, nimmt übernimmt encrypt den Wert vom Property.
+        Falls kein key übergeben wird, nimmt übernimmt decrypt den Wert vom Property.
         >>> caesar = Caesar("b")
         >>> caesar.decrypt("ibmmp")
         'hallo'
