@@ -1,4 +1,5 @@
 import re, doctest
+from typing import List
 
 
 class Caesar:
@@ -40,6 +41,8 @@ class Caesar:
         if key is None:
             key = self.key
 
+        plaintext = self.to_lowercase_letter_only(plaintext)
+
         alphabet = "abcdefghijklmnopqrstuvwxyz"
         key_index = alphabet.find(key)
         encrypted = ""
@@ -55,7 +58,7 @@ class Caesar:
 
         return encrypted
 
-    def decrypt(self, crypttext:str, key:str = None) -> str:
+    def decrypt(self, crypttext: str, key: str = None) -> str:
         """key ist ein Buchstabe, der definiert, um wieviele Zeichen zurückverschoben wird.
         Falls kein key übergeben wird, nimmt übernimmt decrypt den Wert vom Property.
         >>> caesar = Caesar("b")
@@ -70,6 +73,7 @@ class Caesar:
         if key is None:
             key = self.key
 
+        crypttext = self.to_lowercase_letter_only(crypttext)
         alphabet = "abcdefghijklmnopqrstuvwxyz"
         key_index = alphabet.find(key)
         decrypted = ""
@@ -85,7 +89,37 @@ class Caesar:
 
         return decrypted
 
+    def crack(self, crypttext: str, elements: int = 1) -> List[str]:
+        """
+        >>> text='Vor einem großen Walde wohnte ein armer Holzhacker mit seiner Frau und seinen zwei Kindern; das Bübchen hieß Hänsel und das Mädchen Gretel. Er hatte wenig zu beißen und zu brechen, und einmal, als große Teuerung ins Land kam, konnte er das tägliche Brot nicht mehr schaffen. Wie er sich nun abends im Bette Gedanken machte und sich vor Sorgen herumwälzte, seufzte er und sprach zu seiner Frau: "Was soll aus uns werden? Wie können wir unsere armen Kinder ernähren da wir für uns selbst nichts mehr haben?"'
+        >>> caesar = Caesar()
+        >>> caesar.crack(text)
+        ['a']
+        >>> caesar.crack(text, 100) # mehr als 26 können es nicht sein.
+        ['a', 'j', 'n', 'o', 'e', 'w', 'd', 'q', 'z', 'p', 'i', 'h', 'y', 's', 'k', 'x', 'c', 'v', 'g', 'b', 'r', 'l']
+        >>> crypted = caesar.encrypt(text, "y")
+        >>> caesar.crack(crypted, 3)
+        ['y', 'h', 'l']
+        """
+
+        crypttext = self.to_lowercase_letter_only(crypttext)
+        haeufigste = dict()
+        alphabet = "abcdefghijklmnopqrstuvwxyz"
+        for i in alphabet:
+            count = crypttext.count(i)
+            if count != 0: haeufigste[i] = count
+
+        haeufigste = sorted(haeufigste.items(), key=lambda item: item[1], reverse=False)
+        output = []
+
+        for i in range(elements):
+            if i > 26 or i >= haeufigste.__len__():
+                break
+
+            output.append(self.decrypt(haeufigste[::-1][i][0], "e"))
+
+        return output
+
+
 if __name__ == '__main__':
     doctest.testmod(verbose=True)
-    caesar = Caesar()
-    print(caesar.encrypt("hallo", "b"))
