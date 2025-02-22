@@ -36,6 +36,11 @@ public class WordCount {
 
     int counter;
 
+    /**
+     * Funktion zum Zählen der Worte
+     * @param text Text, dessen Wörter gezählt werden
+     * @return Anzahl der Wörter
+     */
     public int count(String text) {
         State state = State.NOWORD;
         counter = 0;

@@ -7,7 +7,7 @@
 package secondtry;
 
 public class WordCount {
-    enum State {
+    private enum State {
         NOWORD {
             @Override
             State handleChar(char c) {
@@ -26,17 +26,17 @@ public class WordCount {
             State handleChar(char c) {
                 if (c == '<') {
                     return TAG;
-                } else if (!Character.isLetter(c)) {
-                    return NOWORD;
-                } else {
-                    return this;
                 }
+                if (!Character.isLetter(c)) {
+                    return NOWORD;
+                }
+                return this;
             }
         },
         TAG {
             @Override
             State handleChar(char c) {
-                if (c == '\"') {
+                if (c == '"') {
                     return ALTTEXT;
                 } else if (c == '>') {
                     return NOWORD;
@@ -51,6 +51,7 @@ public class WordCount {
                 if (c == '\\') {
                     return BACKSLASH_ALTTEXT;
                 }
+
                 if (c == '\"') {
                     return TAG;
                 } else {
