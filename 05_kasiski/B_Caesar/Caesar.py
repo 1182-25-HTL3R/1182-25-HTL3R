@@ -55,8 +55,35 @@ class Caesar:
 
         return encrypted
 
+    def decrypt(self, crypttext:str, key:str = None) -> str:
+        """key ist ein Buchstabe, der definiert, um wieviele Zeichen zurückverschoben wird.
+        Falls kein key übergeben wird, nimmt übernimmt encrypt den Wert vom Property.
+        >>> caesar = Caesar("b")
+        >>> caesar.decrypt("ibmmp")
+        'hallo'
+        >>> caesar.decrypt("jcnnq", "c")
+        'hallo'
+        >>> caesar.decrypt("zab", "c")
+        'xyz'
+        """
 
+        if key is None:
+            key = self.key
 
+        alphabet = "abcdefghijklmnopqrstuvwxyz"
+        key_index = alphabet.find(key)
+        decrypted = ""
+
+        for char in crypttext:
+            char_index = alphabet.find(char)
+            char_index = char_index - key_index
+
+            if char_index < 0:
+                char_index = char_index + (alphabet.__len__())
+
+            decrypted += alphabet[char_index]
+
+        return decrypted
 
 if __name__ == '__main__':
     doctest.testmod(verbose=True)
