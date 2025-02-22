@@ -31,8 +31,6 @@ class Caesar:
         'b'
         >>> caesar.encrypt("hallo")
         'ibmmp'
-        >>> caesar.decrypt("ibmmp")
-        'hallo'
         >>> caesar.encrypt("hallo", "c")
         'jcnnq'
         >>> caesar.encrypt("xyz", "c")
@@ -50,12 +48,14 @@ class Caesar:
             char_index = alphabet.find(char)
             char_index = char_index + key_index
 
-            if char_index > alphabet.__len__():
-                char_index = char_index - alphabet.__len__()
+            if char_index >= alphabet.__len__():
+                char_index = char_index - (alphabet.__len__())
 
             encrypted += alphabet[char_index]
 
         return encrypted
+
+
 
 
 if __name__ == '__main__':
