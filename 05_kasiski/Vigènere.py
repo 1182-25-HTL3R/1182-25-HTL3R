@@ -1,3 +1,9 @@
+"""
+Class: 4CN
+Program UE05_Python_Kasiski - Vigènere
+"""
+__author__ = "Fabian Ha"
+
 from Caesar import Caesar
 import doctest
 
