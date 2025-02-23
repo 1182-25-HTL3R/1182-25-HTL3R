@@ -150,6 +150,16 @@ class Kasiski:
 
         return Counter(ggts)
 
+    def get_nth_letter(self, s:str, start:int, n:int) -> str:
+        """Extrahiert aus s jeden n. Buchstaben beginnend mit index start.
+        Usage examples:
+        >>> k = Kasiski()
+        >>> k.get_nth_letter("Das ist kein kreativer Text.", 1, 4)
+        'asektrx'"""
+
+        return s[start:][::n]
+
+
 
 if __name__ == "__main__":
     doctest.testmod(verbose=True)
