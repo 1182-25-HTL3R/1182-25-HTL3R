@@ -124,5 +124,32 @@ class Kasiski:
 
             return x
 
+    def ggt_count(self, zahlen:List[int]) -> Counter:
+        """
+        >>> from collections import Counter
+        >>> c=Counter([5,8,6,5,3,8,5,3,6,5])
+        >>> print(c)
+        Counter({5: 4, 8: 2, 6: 2, 3: 2})
+        >>> c.most_common()
+        [(5, 4), (8, 2), (6, 2), (3, 2)]
+
+        Bestimmt die Häufigkeit der paarweisen ggt aller Zahlen aus list.
+        Usage examples:
+        >>> k = Kasiski()
+        >>> k.ggt_count([12, 14, 16])
+        Counter({2: 2, 12: 1, 4: 1, 14: 1, 16: 1})
+        >>> k.ggt_count([10, 25, 50, 100])
+        Counter({10: 3, 25: 3, 50: 2, 5: 1, 100: 1})
+        """
+
+        ggts = []
+
+        for pos, zahl1 in enumerate(zahlen):
+            for zahl2 in zahlen[pos:]:
+                ggts.append(self.ggt(zahl1, zahl2))
+
+        return Counter(ggts)
+
+
 if __name__ == "__main__":
     doctest.testmod(verbose=True)
