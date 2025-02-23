@@ -1,5 +1,5 @@
 import doctest
-from typing import List
+from typing import List, Set
 
 
 class Kasiski:
@@ -23,6 +23,28 @@ class Kasiski:
             text = text[0:text.rfind(teilstring)]
 
         return sorted(positions)
+
+    def alldist(self, text:str, teilstring:str) -> Set[int]:
+        """Berechnet die Abstände zwischen allen Vorkommnissen des Teilstrings im verschlüsselten Text.
+        Usage examples:
+        >>> k = Kasiski()
+        >>> k.alldist("heissajuchei, ein ei", "ei")
+        {4, 8, 9, 13, 17}
+        >>> k.alldist("heissajuchei, ein ei", "hai")
+        set()"""
+
+        positions = self.allpos(text, teilstring)
+        distances = set()
+
+        for i in range(positions.__len__()):
+            for j in positions[i:]:
+                distance = j - positions[i]
+                if distance in distances or distance == 0:
+                    continue
+
+                distances.add(distance)
+
+        return distances
 
 if __name__ == "__main__":
     doctest.testmod(verbose=True)
