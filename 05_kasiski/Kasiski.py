@@ -1,7 +1,7 @@
 import doctest
 from collections import Counter
 from typing import List, Set, Tuple
-
+from Caesar import Caesar
 
 class Kasiski:
     crypttext: str
@@ -159,7 +159,28 @@ class Kasiski:
 
         return s[start:][::n]
 
+    def crack_key(self, len: int) -> str:
+        """
+        # Text ist aus Weihnachtserzählungen Band 1 - Doktor Marigold - erste drei Absätze -> mit 'fabian' verschlüsselt
+        >>> verschlüsselter_text = "ncijiajionauweoleemneteezneleesanmmrnnfavnyesawnwwjtlhrmbzittlehufjiomnyjbamigjnwmrzztfbeajioqgrqevbefjiovazjsfqwvqljimngesuevsvbbeegeiiucyeumsgjttpaeyndsitsejveemifmwvqlvuwnxmjkhnsgfptftbfontjidpmvhheimvydjmsnhhfdoakomoeaienatnsdqcnxyavazhgeuzapmtfvwrsnfaevsenuaasiomiajmgzevjnminqjnjkhgletbagyeuaevssptlfjiomnrngfveasanmnmzkfvnrswbaknsnjpmqfwpplatciqnrnnfulnsdxwsxqawmrrnhfzrfhhumryfucbsrnnxmnaraolirxadpeitmtbaaipvvkgietzetnsumrffutjegwadptryspsazbimtuzrasqgbqdbcfqnexmlggewwratcizetnsumrfjhsqmfhhxintjwbzeaznembrsspdeeqifmrfnebccubifleefufzdrrwsleaxifqhzxeizwrsihhutjsbotufbfvwrsntqemzfmtitjrxmifjsdpoaaosqhzfugoextmnmnjweoqcubuslensdfzsgfauasgwafoeotrfvuaimfqniftfzhbqtfmiajnewkgtracmrnnfzmhytfzayxdbaeejihviffugmiajrhmmrnnemwvjsfmiayrbbdvjsfzdbptpzwnwejvsrmrgzehsdmqcujrhmngqeninhsdxwlyyebtsutnpzaesidptffnomhzjnbtsrnnumegfbmmtgzneaojzremipmavadnskcirxjiucnqfltjeftnemrrfugueepsbukrntjpmtjgfvbrwdpstbwgfvaasteihngtjprznciilftdpstbwmbzittleqcugiooetjnxztvlejvmnsnjvmvytmmrrsjbprrsvpvuayesaegetfzgrxtbttvsmbvcujsumrutsfvlriesoazfsdpeaznemiajrxmsgjmjbrzjloinqjriqngjntbegxdfzrvjgftfrmluuaapaoviusspwfgfutjefxesvwvjmbvwvqlfzpyftabizreseirieseiriifaavyeomiajrwqoynnfqhexejlsvhhfzspmooqmgmebbeelexmsrsuolhngthmsrmeoeirjiomrqjrwqoynntxirqesvapmdfueefntmiajrwqoynnfoeutrdptuftumayxfmatrwetqevmmeistjhfqmansacsvjfskhgjnjkhgnnpzdaznhhufjioinvmrimrhrdsmhgjuolahkejvmnqhsbegnhseiriifaavyeqtagetfoeafutwgrmtfaahhhnqtzjiomrjjsumsbbejbevsexmsgjuolevsewqoynnfmiafnemrtqejkhfjiosnajn"
+        >>> k = Kasiski(verschlüsselter_text)
+        >>> k.crack_key(4)
+        'fabian'
+        >>> k.crack_key(7)
+        'fabian'
+        """
+        distances = self.dist_n_list(self.crypttext, len)
+        ceasar = Caesar()
+        ggts = self.ggt_count(distances).most_common()
+        key_len = ggts[0][0]
+        if key_len == 1:
+            key_len = ggts[1][0]
 
+        key = ""
+        for i in range(key_len):
+            key += ceasar.crack(self.get_nth_letter(self.crypttext, i, key_len))[0]
+
+        return key
 
 if __name__ == "__main__":
     doctest.testmod(verbose=True)
