@@ -9,6 +9,10 @@ from typing import List
 
 
 class Caesar:
+    """
+    Klasse dient zur Repräsentation der Caesar-Chiffre
+    :param key: Schlüssel, mit welchem verschlüsselt wird, ein Buchstabe
+    """
     key: str
 
     def __init__(self, key=None):
