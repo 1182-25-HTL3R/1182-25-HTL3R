@@ -9,6 +9,10 @@ import doctest
 
 
 class Vigenere:
+    """
+    Klasse dient zur Repräsentation der Vigenere-Chiffre
+    :param key: Schlüssel, mit welchem verschlüsselt wird, können mehrere Buchstaben sein
+    """
     key: str
 
     def __init__(self, key):
