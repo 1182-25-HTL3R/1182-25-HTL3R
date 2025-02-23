@@ -1,3 +1,9 @@
+"""
+Class: 4CN
+Program UE05_Python_Kasiski - Kasiski
+"""
+__author__ = "Fabian Ha"
+
 import doctest
 from collections import Counter
 from typing import List, Set, Tuple
@@ -6,13 +12,22 @@ from Vigènere import Vigenere
 
 
 class Kasiski:
+    """
+    Der Kasiski-Test ist ein Verfahren zur Entschlüsselung von Texten, die mit der Vigenère-Chiffre verschlüsselt wurden.
+    Wir implementieren die Klasse Kasiski, die dabei hilft, die Vigenère-Chiffre zu knacken
+    """
     crypttext: str
 
     def __init__(self, crypttext: str = ""):
         self.crypttext = crypttext
 
     def allpos(self, text: str, teilstring: str) -> List[int]:
-        """Berechnet die Positionen von teilstring in text.
+        """
+        Berechnet die Positionen von teilstring in text.
+        :param text: Text input
+        :param teilstring: Teil des Texts
+        :return: Positionen der Teile im Text
+
         Usage examples:
         >>> k = Kasiski()
         >>> k.allpos("heissajuchei, ein ei", "ei")
@@ -28,7 +43,12 @@ class Kasiski:
         return sorted(positions)
 
     def alldist(self, text: str, teilstring: str) -> Set[int]:
-        """Berechnet die Abstände zwischen allen Vorkommnissen des Teilstrings im verschlüsselten Text.
+        """
+        Berechnet die Abstände zwischen allen Vorkommnissen des Teilstrings im verschlüsselten Text.
+        :param text: Text input
+        :param teilstring: Teil des Texts
+        :return: Alle Abstände zwischen den Vorkommnissen der Teilstrings
+
         Usage examples:
         >>> k = Kasiski()
         >>> k.alldist("heissajuchei, ein ei", "ei")
@@ -50,8 +70,13 @@ class Kasiski:
         return distances
 
     def dist_n_tuple(self, text: str, laenge: int) -> Set[Tuple[str, int]]:
-        """Überprüft alle Teilstrings aus text mit der gegebenen laenge und liefert ein Set
+        """
+        Überprüft alle Teilstrings aus text mit der gegebenen laenge und liefert ein Set
         mit den Abständen aller Wiederholungen der Teilstrings in text.
+        :param text: Text input
+        :param laenge: Länge der Teilstrings
+        :return: Set mit den Abständen aller Wiederholungen der Teilstrings
+
         Usage examples:
         >>> k = Kasiski()
         >>> k.dist_n_tuple("heissajuchei", 2) == {('ei', 9), ('he', 9)}
@@ -80,8 +105,14 @@ class Kasiski:
         return dist_n
 
     def dist_n_list(self, text: str, laenge: int) -> List[int]:
-        """Wie dist_tuple, liefert aber nur eine aufsteigend sortierte Liste der
+        """
+        Wie dist_tuple, liefert aber nur eine aufsteigend sortierte Liste der
         Abstände ohne den Text zurück. In der Liste soll kein Element mehrfach vorkommen.
+
+        :param text: Text input
+        :param laenge: Länge der Teilstrings
+        :return: Liste der Abstände zwischen den Textteilen ohne den Text
+
         Usage examples:
         >>> k = Kasiski()
         >>> k.dist_n_list("heissajucheieinei", 2)
@@ -107,7 +138,13 @@ class Kasiski:
         return sorted(dist_n)
 
     def ggt(self, x: int, y: int) -> int:
-        """Ermittelt den größten gemeinsamen Teiler von x und y.
+        """
+        Ermittelt den größten gemeinsamen Teiler von x und y.
+
+        :param x: Zahl 1
+        :param y: Zahl 2
+        :return: Größter gemeinsamer Teiler von x und y
+
         Usage examples:
         >>> k = Kasiski()
         >>> k.ggt(10, 25)
@@ -128,14 +165,11 @@ class Kasiski:
 
     def ggt_count(self, zahlen: List[int]) -> Counter:
         """
-        >>> from collections import Counter
-        >>> c=Counter([5,8,6,5,3,8,5,3,6,5])
-        >>> print(c)
-        Counter({5: 4, 8: 2, 6: 2, 3: 2})
-        >>> c.most_common()
-        [(5, 4), (8, 2), (6, 2), (3, 2)]
-
         Bestimmt die Häufigkeit der paarweisen ggt aller Zahlen aus list.
+
+        :param zahlen: Zahlen Liste
+        :return: Vorkommnisse aller ggts der Zahlen paarweise
+
         Usage examples:
         >>> k = Kasiski()
         >>> k.ggt_count([12, 14, 16])
@@ -153,7 +187,14 @@ class Kasiski:
         return Counter(ggts)
 
     def get_nth_letter(self, s: str, start: int, n: int) -> str:
-        """Extrahiert aus s jeden n. Buchstaben beginnend mit index start.
+        """
+        Extrahiert aus s jeden n. Buchstaben beginnend mit index start.
+
+        :param s: Input Text
+        :param start: Start index
+        :param n: Abstand der Perioden
+        :return: jeder nte Buchstabe aus s extrahiert als String
+
         Usage examples:
         >>> k = Kasiski()
         >>> k.get_nth_letter("Das ist kein kreativer Text.", 1, 4)
@@ -163,6 +204,11 @@ class Kasiski:
 
     def crack_key(self, len: int) -> str:
         """
+        Liefert den wahrscheinlichsten key zurück
+
+        :param len: Länge der Teilstrings
+        :return: wahrscheinlichsten Key
+
         # Text ist aus Weihnachtserzählungen Band 1 - Doktor Marigold - erste drei Absätze -> mit 'fabian' verschlüsselt
         >>> verschlüsselter_text = "ncijiajionauweoleemneteezneleesanmmrnnfavnyesawnwwjtlhrmbzittlehufjiomnyjbamigjnwmrzztfbeajioqgrqevbefjiovazjsfqwvqljimngesuevsvbbeegeiiucyeumsgjttpaeyndsitsejveemifmwvqlvuwnxmjkhnsgfptftbfontjidpmvhheimvydjmsnhhfdoakomoeaienatnsdqcnxyavazhgeuzapmtfvwrsnfaevsenuaasiomiajmgzevjnminqjnjkhgletbagyeuaevssptlfjiomnrngfveasanmnmzkfvnrswbaknsnjpmqfwpplatciqnrnnfulnsdxwsxqawmrrnhfzrfhhumryfucbsrnnxmnaraolirxadpeitmtbaaipvvkgietzetnsumrffutjegwadptryspsazbimtuzrasqgbqdbcfqnexmlggewwratcizetnsumrfjhsqmfhhxintjwbzeaznembrsspdeeqifmrfnebccubifleefufzdrrwsleaxifqhzxeizwrsihhutjsbotufbfvwrsntqemzfmtitjrxmifjsdpoaaosqhzfugoextmnmnjweoqcubuslensdfzsgfauasgwafoeotrfvuaimfqniftfzhbqtfmiajnewkgtracmrnnfzmhytfzayxdbaeejihviffugmiajrhmmrnnemwvjsfmiayrbbdvjsfzdbptpzwnwejvsrmrgzehsdmqcujrhmngqeninhsdxwlyyebtsutnpzaesidptffnomhzjnbtsrnnumegfbmmtgzneaojzremipmavadnskcirxjiucnqfltjeftnemrrfugueepsbukrntjpmtjgfvbrwdpstbwgfvaasteihngtjprznciilftdpstbwmbzittleqcugiooetjnxztvlejvmnsnjvmvytmmrrsjbprrsvpvuayesaegetfzgrxtbttvsmbvcujsumrutsfvlriesoazfsdpeaznemiajrxmsgjmjbrzjloinqjriqngjntbegxdfzrvjgftfrmluuaapaoviusspwfgfutjefxesvwvjmbvwvqlfzpyftabizreseirieseiriifaavyeomiajrwqoynnfqhexejlsvhhfzspmooqmgmebbeelexmsrsuolhngthmsrmeoeirjiomrqjrwqoynntxirqesvapmdfueefntmiajrwqoynnfoeutrdptuftumayxfmatrwetqevmmeistjhfqmansacsvjfskhgjnjkhgnnpzdaznhhufjioinvmrimrhrdsmhgjuolahkejvmnqhsbegnhseiriifaavyeqtagetfoeafutwgrmtfaahhhnqtzjiomrjjsumsbbejbevsexmsgjuolevsewqoynnfmiafnemrtqejkhfjiosnajn"
         >>> k = Kasiski(verschlüsselter_text)
@@ -192,5 +238,5 @@ if __name__ == "__main__":
     verschlüsselter_text = v.encrypt(
         "Ich bin ein fahrender Händler, und der Name meines Vaters war Willum Marigold. Zu seinen Lebzeiten vermuteten einige Leute, sein Name sei William, aber mein Vater behauptete stets hartnäckig, nein, er hieße Willum. Was mich angeht, so begnüge ich mich damit, die Sache von folgendem Standpunkt aus zu betrachten: Wenn es einem Mann in einem freien Lande nicht gestattet sein soll, seinen eigenen Namen zu kennen, was kann ihm da wohl noch in einem Land, wo Sklaverei herrscht, erlaubt sein? Wenn man die Sache vom Standpunkt des Registers aus betrachtet, so kam Willum Marigold auf die Welt, bevor noch Register sehr im Schwange waren – und ebenso verließ er sie auch wieder. Außerdem würden sie ihm sehr wenig zugesagt haben, wenn sie zufälligerweise schon vor ihm aufgekommen wären. Ich wurde an der Staatsstraße geboren, und mein Vater holte einen Doktor zu meiner Mutter, als das Ereignis auf einer Gemeindewiese eintrat. Dieser Doktor war ein sehr freundlicher Gentleman und wollte als Honorar nichts annehmen als ein Teetablett, und so wurde ich aus Dankbarkeit und als besondere Aufmerksamkeit ihm gegenüber Doktor genannt. Da habt ihr mich also, Doktor Marigold. Ich bin gegenwärtig ein Mann in mittleren Jahren, von untersetzter Gestalt, in Manchesterhosen, Ledergamaschen und einer Weste mit Ärmeln, an der hinten stets der Riegel fehlt. Man kann ihn so oft ausbessern, wie man will, er platzt immer wieder, wie die Saiten einer Violine. Ihr seid sicher schon im Theater gewesen und habt gesehen, wie einer der Violinspieler, nachdem er an seiner Violine gehorcht hatte, als flüstere sie ihm das Geheimnis zu, sie fürchte, nicht in Ordnung zu sein, an ihr herumdrehte, und auf einmal hörtet ihr, wie die Saite platzte. Genauso geht es auch mit meiner Weste, soweit eine Weste und eine Violine einander gleich sein können.")
     k = Kasiski(verschlüsselter_text)
-    print(k.crack_key(3))
-    print(k.crack_key(8))
+    print("key Ergebnis: " + str(k.crack_key(3)))
+    print("key Ergebnis: " + str(k.crack_key(8)))
