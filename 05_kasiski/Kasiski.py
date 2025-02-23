@@ -1,4 +1,5 @@
 import doctest
+from collections import Counter
 from typing import List, Set, Tuple
 
 
@@ -103,6 +104,25 @@ class Kasiski:
 
         return sorted(dist_n)
 
+    def ggt(self, x:int, y:int) -> int:
+        """Ermittelt den größten gemeinsamen Teiler von x und y.
+        Usage examples:
+        >>> k = Kasiski()
+        >>> k.ggt(10, 25)
+        5
+        >>> k.ggt(10, 25)
+        5"""
+
+        if x == y:
+            return y
+        else:
+            while y != 0:
+                if x > y:
+                    x = x - y
+                else:
+                    y = y - x
+
+            return x
 
 if __name__ == "__main__":
     doctest.testmod(verbose=True)
