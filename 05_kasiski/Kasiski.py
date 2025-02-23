@@ -2,6 +2,7 @@ import doctest
 from collections import Counter
 from typing import List, Set, Tuple
 from Caesar import Caesar
+from Vigènere import Vigenere
 
 class Kasiski:
     crypttext: str
@@ -184,3 +185,9 @@ class Kasiski:
 
 if __name__ == "__main__":
     doctest.testmod(verbose=True)
+
+    v = Vigenere("fabiansun")
+    verschlüsselter_text = v.encrypt("Ich bin ein fahrender Händler, und der Name meines Vaters war Willum Marigold. Zu seinen Lebzeiten vermuteten einige Leute, sein Name sei William, aber mein Vater behauptete stets hartnäckig, nein, er hieße Willum. Was mich angeht, so begnüge ich mich damit, die Sache von folgendem Standpunkt aus zu betrachten: Wenn es einem Mann in einem freien Lande nicht gestattet sein soll, seinen eigenen Namen zu kennen, was kann ihm da wohl noch in einem Land, wo Sklaverei herrscht, erlaubt sein? Wenn man die Sache vom Standpunkt des Registers aus betrachtet, so kam Willum Marigold auf die Welt, bevor noch Register sehr im Schwange waren – und ebenso verließ er sie auch wieder. Außerdem würden sie ihm sehr wenig zugesagt haben, wenn sie zufälligerweise schon vor ihm aufgekommen wären. Ich wurde an der Staatsstraße geboren, und mein Vater holte einen Doktor zu meiner Mutter, als das Ereignis auf einer Gemeindewiese eintrat. Dieser Doktor war ein sehr freundlicher Gentleman und wollte als Honorar nichts annehmen als ein Teetablett, und so wurde ich aus Dankbarkeit und als besondere Aufmerksamkeit ihm gegenüber Doktor genannt. Da habt ihr mich also, Doktor Marigold. Ich bin gegenwärtig ein Mann in mittleren Jahren, von untersetzter Gestalt, in Manchesterhosen, Ledergamaschen und einer Weste mit Ärmeln, an der hinten stets der Riegel fehlt. Man kann ihn so oft ausbessern, wie man will, er platzt immer wieder, wie die Saiten einer Violine. Ihr seid sicher schon im Theater gewesen und habt gesehen, wie einer der Violinspieler, nachdem er an seiner Violine gehorcht hatte, als flüstere sie ihm das Geheimnis zu, sie fürchte, nicht in Ordnung zu sein, an ihr herumdrehte, und auf einmal hörtet ihr, wie die Saite platzte. Genauso geht es auch mit meiner Weste, soweit eine Weste und eine Violine einander gleich sein können.")
+    k = Kasiski(verschlüsselter_text)
+    print(k.crack_key(3))
+    print(k.crack_key(8))
