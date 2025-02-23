@@ -76,5 +76,33 @@ class Kasiski:
 
         return dist_n
 
+    def dist_n_list(self, text: str, laenge: int) -> List[int]:
+        """Wie dist_tuple, liefert aber nur eine aufsteigend sortierte Liste der
+        Abstände ohne den Text zurück. In der Liste soll kein Element mehrfach vorkommen.
+        Usage examples:
+        >>> k = Kasiski()
+        >>> k.dist_n_list("heissajucheieinei", 2)
+        [2, 3, 5, 9, 11, 14]
+        >>> k.dist_n_list("heissajucheieinei", 3)
+        [9]
+        >>> k.dist_n_list("heissajucheieinei", 4)
+        []"""
+
+        dist_n = []
+        for i in range(text.__len__()):
+            if text[i + laenge:].find(text[i:i + laenge]):
+                teilstring = text[i:i + laenge]
+                if teilstring.__len__() != laenge:
+                    continue
+
+                distances = self.alldist(text, teilstring)
+
+                for distance in distances:
+                    if distance not in dist_n:
+                        dist_n.append(distance)
+
+        return sorted(dist_n)
+
+
 if __name__ == "__main__":
     doctest.testmod(verbose=True)
