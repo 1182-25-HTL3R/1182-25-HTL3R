@@ -1,6 +1,6 @@
 """
 Class: 4CN
-Program UE06_Adminscripting - pathlib-Modul
+Program UE06_Adminscripting - find_files_by_ext.py
 """
 __author__ = "Fabian Ha"
 """
