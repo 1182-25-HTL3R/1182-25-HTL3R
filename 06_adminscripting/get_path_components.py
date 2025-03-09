@@ -1,6 +1,6 @@
 """
 Class: 4CN
-Program UE06_Adminscripting - pathlib-Modul
+Program UE06_Adminscripting - get_path_components.py
 """
 __author__ = "Fabian Ha"
 
