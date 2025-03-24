@@ -15,7 +15,7 @@ class Caesar:
     """
     key: str
 
-    def __init__(self, key):
+    def __init__(self, key=None):
         self.key = key
 
     @staticmethod
