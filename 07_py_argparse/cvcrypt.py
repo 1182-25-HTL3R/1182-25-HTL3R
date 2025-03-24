@@ -7,6 +7,10 @@ from Vigènere import Vigenere
 import os
 
 def main() -> None:
+    """
+    argparse Programm für Caesar und Vigenere Ver- und Entschlüsselung
+    :return: nichts
+    """
     parser = argparse.ArgumentParser(
         description="Caesar und Vigenere Entschlüsselungs- und Verschlüsselungsprogramm",
     )
