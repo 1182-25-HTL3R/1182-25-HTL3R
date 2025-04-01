@@ -13,6 +13,11 @@ def read_all_words(filename: str) -> set[str]:
 
 
 def split_word(wort: str) -> list[tuple[str, str]]:
+    """
+    bestimmt eine Liste aller Aufteilungen des Wortes
+    :param wort: string Wort, das aufgeteilt wird
+    :return: Liste aus Tuplen mit Aufteilungen
+    """
     return [(wort[:x], wort[x:]) for x in range(len(wort) + 1)]
 
 
