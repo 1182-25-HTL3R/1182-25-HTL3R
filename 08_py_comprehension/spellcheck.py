@@ -12,5 +12,10 @@ def read_all_words(filename: str) -> set[str]:
         return {x.strip() for x in li}
 
 
+def split_word(wort: str) -> list[tuple[str, str]]:
+    return [(wort[:x], wort[x:]) for x in range(len(wort) + 1)]
+
+
 if __name__ == '__main__':
     print(read_all_words('C:\\Users\\fabia\\Downloads\\08_py_comprehension\\de-en\\de-en.txt'))
+    print(split_word("abc"))
