@@ -46,6 +46,12 @@ def edit1(wort: str) -> set[str]:
 
 
 def edit1_good(wort: str, alle_woerter: list[str]) -> set[str]:
+    """
+    liefert nur die richtigen Wörter aus dem Wörterbuch
+    :param wort: Wort welches überprüft wird
+    :param alle_woerter: Liste aller Wörter
+    :return: die richtigen Wörter
+    """
     return edit1(wort.lower()) & set(alle_woerter)
 
 
