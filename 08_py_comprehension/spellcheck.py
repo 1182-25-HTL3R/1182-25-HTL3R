@@ -1,5 +1,7 @@
 __author__ = "Fabian Ha"
 
+import doctest
+
 
 def read_all_words(filename: str) -> set[str]:
     """
@@ -30,13 +32,13 @@ def edit1(wort: str) -> set[str]:
     d) ein Buchstabe eingefügt wurde
     :param wort: Wort welches auf Fehler angesehen wird
     :return: Set aus möglichen Wörtern
+
+    >>> my_set = edit1("ab")
+    >>> my_set == {'aob', 'oab', 'ib', 'pab', 'akb', 'al', 'zb', 'yb', 'apb', 'ob', 'aqb', 'lb', 'ah', 'ahb', 'pb', 'am', 'fb', 'ac', 'axb', 'abu', 'tab', 'fab', 'sab', 'rb', 'abw', 'abo', 'vb', 'nab', 'vab', 'abc', 'abq', 'ay', 'abn', 'mab', 'nb', 'abi', 'ak', 'abk', 'iab', 'aeb', 'anb', 'bb', 'af', 'azb', 'ab', 'abe', 'abs', 'cb', 'acb', 'hb', 'jb', 'au', 'abj', 'rab', 'avb', 'ae', 'abb', 'abp', 'gb', 'eab', 'eb', 'av', 'aj', 'atb', 'az', 'asb', 'wb', 'ar', 'sb', 'mb', 'abg', 'aub', 'abm', 'abv', 'ayb', 'ad', 'xab', 'qb', 'bab', 'yab', 'ap', 'aq', 'aab', 'b', 'uab', 'a', 'ba', 'wab', 'at', 'as', 'arb', 'ao', 'ag', 'ai', 'alb', 'kb', 'aw', 'jab', 'lab', 'qab', 'abh', 'aby', 'ub', 'aba', 'afb', 'aa', 'ajb', 'hab', 'gab', 'aib', 'xb', 'adb', 'awb', 'agb', 'abr', 'dab', 'amb', 'abt', 'abl', 'ax', 'tb', 'kab', 'db', 'abd', 'zab', 'cab', 'abz', 'abf', 'abx', 'an'}
+    True
     """
     li = split_word(wort)
     alphabet = "abcdefghijklmnopqrstuvwxyz"
-    # print({x[0] + x[1][1:] for x in li})  # a)
-    # print({x[0] + x[1][1] + x[1][0] + x[1][2:] for x in li if len(x[1]) >= 2})  # b)
-    # print({x[0] + y + x[1][1:] for x in li for y in alphabet})    # c)
-    # print({x[0] + y + x[1] for x in li for y in alphabet})    # d)
     return ({x[0] + x[1][1:] for x in li}
             .union({x[0] + x[1][1] + x[1][0] + x[1][2:] for x in li if len(x[1]) >= 2})
             .union({x[0] + y + x[1][1:] for x in li for y in alphabet})
@@ -46,4 +48,5 @@ def edit1(wort: str) -> set[str]:
 if __name__ == '__main__':
     print(read_all_words('C:\\Users\\fabia\\Downloads\\08_py_comprehension\\de-en\\de-en.txt'))
     print(split_word("abc"))
-    print(edit1("abcd"))
+    print(edit1("ab"))
+    doctest.testmod()
