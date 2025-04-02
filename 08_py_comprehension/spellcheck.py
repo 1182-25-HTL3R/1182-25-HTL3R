@@ -11,7 +11,7 @@ def read_all_words(filename: str) -> set[str]:
     """
     with open(filename) as f:
         li = f.readlines()
-        return {x.strip() for x in li}
+        return {x.strip().lower() for x in li}
 
 
 def split_word(wort: str) -> list[tuple[str, str]]:
@@ -45,8 +45,13 @@ def edit1(wort: str) -> set[str]:
             .union({x[0] + y + x[1] for x in li for y in alphabet}))
 
 
+def edit1_good(wort: str, alle_woerter: list[str]) -> set[str]:
+    return edit1(wort.lower()) & set(alle_woerter)
+
+
 if __name__ == '__main__':
-    print(read_all_words('C:\\Users\\fabia\\Downloads\\08_py_comprehension\\de-en\\de-en.txt'))
+    all_words = read_all_words('C:\\Users\\fabia\\Downloads\\08_py_comprehension\\de-en\\de-en.txt')
     print(split_word("abc"))
     print(edit1("ab"))
     doctest.testmod()
+    print(edit1_good("Pyton", list(all_words)))
