@@ -54,6 +54,16 @@ def edit1_good(wort: str, alle_woerter: list[str]) -> set[str]:
     """
     return edit1(wort.lower()) & set(alle_woerter)
 
+def edit2_good(wort: str, alle_woerter: list[str]) -> set[str]:
+    """
+    bestimmt wörter mit edit-Distanz zwei
+    :param wort: Wort welches überprüft wird
+    :param alle_woerter: Liste aller Wörter
+    :return: die richtigen Wörter
+    """
+    edit2 = set.union(*[edit1(w.lower()) for w in edit1(wort.lower())])
+    return edit2 & set(alle_woerter)
+
 
 if __name__ == '__main__':
     all_words = read_all_words('C:\\Users\\fabia\\Downloads\\08_py_comprehension\\de-en\\de-en.txt')
@@ -61,3 +71,4 @@ if __name__ == '__main__':
     print(edit1("ab"))
     doctest.testmod()
     print(edit1_good("Pyton", list(all_words)))
+    print(edit2_good("Pyton", list(all_words)))
