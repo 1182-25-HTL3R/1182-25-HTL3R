@@ -54,6 +54,7 @@ def edit1_good(wort: str, alle_woerter: list[str]) -> set[str]:
     """
     return edit1(wort.lower()) & set(alle_woerter)
 
+
 def edit2_good(wort: str, alle_woerter: list[str]) -> set[str]:
     """
     bestimmt wörter mit edit-Distanz zwei
@@ -65,6 +66,20 @@ def edit2_good(wort: str, alle_woerter: list[str]) -> set[str]:
     return edit2 & set(alle_woerter)
 
 
+def correct(word: str, alle_woerter: list[str]) -> set[str]:
+    """
+    Findet die Korrektur(en) für word als "Liste":
+    • entweder ist das Wort im Wörterbuch (Ergebnis: eine Liste mit einem Eintrag word)
+    • oder (mindestens) ein Wort mit Edit-Distanz eins ist im Wörterbuch (Ergebnis: Liste dieser Wörter)
+    • oder (mindestens) ein Wort mit Edit-Distanz zwei ist im Wörterbuch (Ergebnis: Liste dieser Wörter)
+    • oder wir haben keine Idee (zu viele Fehler oder unbekanntes Wort): liefere eine leere Liste
+    :param word: Wort welches überprüft wird
+    :param alle_woerter: Liste aller Wörter
+    :return: die Korrekturen für word als "Liste"
+    """
+    return {word.lower()} if word.lower() in alle_woerter else edit1_good(word, alle_woerter) or edit2_good(word, alle_woerter) or set()
+
+
 if __name__ == '__main__':
     all_words = read_all_words('C:\\Users\\fabia\\Downloads\\08_py_comprehension\\de-en\\de-en.txt')
     print(split_word("abc"))
@@ -72,3 +87,8 @@ if __name__ == '__main__':
     doctest.testmod()
     print(edit1_good("Pyton", list(all_words)))
     print(edit2_good("Pyton", list(all_words)))
+    print(correct("Platon", list(all_words)))
+    print(correct("Plaaton", list(all_words)))
+    print(correct("Plaaaton", list(all_words)))
+    # a or b gibt a zurück wenn a true ist, sonst b
+    # a | b gibt eine Vereinigung der sets zurück, also alle Elemente
