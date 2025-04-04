@@ -76,12 +76,26 @@ def correct(word: str, alle_woerter: list[str]) -> set[str]:
     :param word: Wort welches überprüft wird
     :param alle_woerter: Liste aller Wörter
     :return: die Korrekturen für word als "Liste"
+    >>> woerter = list(read_all_words("de-en.txt"))
+    >>> sorted(correct("Aalsuppe", woerter))
+    ['aalsuppe']
+    >>> sorted(correct("Alsuppe", woerter))
+    ['aalsuppe']
+    >>> sorted(correct("Alsupe", woerter))
+    ['aalsuppe', 'absude', 'alse', 'lupe']
+
+    die Test-Beispiele in der Angabe geben in meinen Augen keinen Sinn:
+        Z.B.: "Aalsuppe" soll ['aalquappe', 'aalsuppe', 'aalsuppen'], was die Ergebnisse für edit Distanz 1 sind,
+        jedoch haben wir in der Funktion edit1 explizit festgelegt, dass alle Wörter .lower() gemacht werden.
+
+        Oder: "Alsuppe" soll ['aalsuppe', 'aalsuppen', 'suppe', 'ursuppe'] zurückgeben, was die Ergebnisse für edit Distanz 2 sind,
+        aber wenn man Alsuppe sofort zu alsuppe macht (.lower()), dann ist leicht erkennbar, dass es edit Distanz 1 ist.
     """
     return {word.lower()} if word.lower() in alle_woerter else edit1_good(word, alle_woerter) or edit2_good(word, alle_woerter) or set()
 
 
 if __name__ == '__main__':
-    all_words = read_all_words('C:\\Users\\fabia\\Downloads\\08_py_comprehension\\de-en\\de-en.txt')
+    all_words = read_all_words('de-en.txt')
     print(split_word("abc"))
     print(edit1("ab"))
     doctest.testmod()
