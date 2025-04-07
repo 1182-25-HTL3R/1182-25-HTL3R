@@ -8,3 +8,7 @@ class Fraction:
             return str(self.numerator)
 
         return str(self.numerator) + "/" + str(self.denominator)
+
+    def __add__(self, other):
+        return Fraction(self.numerator * other.denominator + self.denominator * other.nominator,
+                        self.denominator * other.denominator)
