@@ -25,6 +25,10 @@ class Fraction:
         return Fraction(self.numerator * other.denominator + self.denominator * other.numerator,
                         self.denominator * other.denominator)
 
+    def __sub__(self, other):
+        return Fraction(self.numerator * other.denominator - self.denominator * other.numerator,
+                        self.denominator * other.denominator)
+
 
 if __name__ == "__main__":
     f1 = Fraction(1, 2)
