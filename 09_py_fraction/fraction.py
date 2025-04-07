@@ -32,6 +32,9 @@ class Fraction:
     def __mul__(self, other):
         return Fraction(self.numerator * other.numerator, self.denominator * other.denominator)
 
+    def __truediv__(self, other):
+        return Fraction(self.numerator * other.denominator, self.denominator * other.numerator)
+
 
 if __name__ == "__main__":
     f1 = Fraction(1, 2)
@@ -39,3 +42,6 @@ if __name__ == "__main__":
     print(f1)
     print(f2)
     print(f1 + f2)
+    print(f1 - f2)
+    print(f1 * f2)
+    print(f1 / f2)
