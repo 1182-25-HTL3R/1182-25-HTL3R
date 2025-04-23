@@ -84,7 +84,9 @@ class Fraction:
         :param other: Zahl
         :return: addierter Bruch
         """
-        return Fraction(other) + self
+        if isinstance(other, int):
+            return Fraction(other) + self
+        return Exception
 
     def __sub__(self, other):
         """
@@ -92,8 +94,18 @@ class Fraction:
         :param other: anderer Bruch
         :return: subtrahierter Bruch
         """
-        return Fraction(self.numerator * other.denominator - self.denominator * other.numerator,
-                        self.denominator * other.denominator)
+        return Fraction(self._numerator * other.denominator - self._denominator * other.numerator,
+                        self._denominator * other.denominator)
+
+    def __rsub__(self, other):
+        """
+        subtrahiert eine Zahl von einem Bruch
+        :param other: Zahl
+        :return: subtrahierter Bruch
+        """
+        if isinstance(other, int):
+            return Fraction(other) - self
+        return Exception
 
     def __mul__(self, other):
         """
