@@ -146,6 +146,18 @@ class Fraction:
             return Fraction(other) / self
         return NotImplemented
 
+    def __eq__(self, other):
+        """
+        vergleicht auf Gleichheit
+        :param other: Zahl oder Bruch
+        :return: Ergebnis des Vergleichs - true or false
+        """
+        if isinstance(other, int):
+            return self == Fraction(other)
+        if isinstance(other, Fraction):
+            return self._numerator == other.numerator and self._denominator == other.denominator
+        return NotImplemented
+
 
 if __name__ == "__main__":
     f1 = Fraction(1, 2)
