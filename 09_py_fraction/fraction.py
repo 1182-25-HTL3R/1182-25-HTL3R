@@ -1,3 +1,4 @@
+import doctest
 import functools
 import math
 
@@ -9,6 +10,15 @@ class Fraction:
     Attributes:
         _numerator: Zähler des Bruchs
         _denominator: Nenner des Bruchs
+
+    >>> Fraction(3, 6)
+    Fraction(1, 2)
+    >>> Fraction(-3, -6)
+    Fraction(1, 2)
+    >>> Fraction(-3, 6)
+    Fraction(-1, 2)
+    >>> Fraction(3, -6)
+    Fraction(-1, 2)
     """
 
     def __init__(self, numerator: int = 0, denominator: int = 1):
@@ -16,6 +26,18 @@ class Fraction:
         Konstruktor für einen Bruch
         :param numerator: Zähler
         :param denominator: Nenner
+
+        >>> Fraction(2, 4)
+        Fraction(1, 2)
+        >>> Fraction(-2, 4)
+        Fraction(-1, 2)
+        >>> Fraction(0, 5)
+        Fraction(0, 1)
+        >>> try:
+        ...     Fraction(1, 0)
+        ... except ArithmeticError:
+        ...     print("ArithmeticError")
+        ArithmeticError
         """
         gcd = math.gcd(numerator, denominator)
 
@@ -33,8 +55,11 @@ class Fraction:
     def numerator(self) -> int:
         """
         Gibt den Zähler des Bruchs zurück
-
         :return: Zähler
+        >>> Fraction(5, 2).numerator
+        5
+        >>> Fraction(-3, 4).numerator
+        -3
         """
         return self._numerator
 
@@ -42,8 +67,11 @@ class Fraction:
     def denominator(self) -> int:
         """
         Gibt den Nenner des Bruchs zurück
-
         :return: Nenner
+        >>> Fraction(5, 2).denominator
+        2
+        >>> Fraction(3, -4).denominator
+        4
         """
         return self._denominator
 
@@ -51,6 +79,14 @@ class Fraction:
         """
         erstellt eine sinnvolle Representation eines Bruchs
         :return: String Representation eines Bruchs
+        >>> str(Fraction(3, 1))
+        '3'
+        >>> str(Fraction(5, 3))
+        '1 2/3'
+        >>> str(Fraction(2, 3))
+        '2/3'
+        >>> str(Fraction(-7, 3))
+        '-2 1/3'
         """
 
         num, den = self._numerator, self._denominator
@@ -58,15 +94,18 @@ class Fraction:
             return str(num)
 
         if abs(num) > den:
-            return f"{num // den} {abs(num) % den}/{den}"
+            return f"{int(num / den)} {abs(num) % den}/{den}"
 
         return f"{num}/{den}"
 
     def __repr__(self) -> str:
         """
         Offizielle String-Repraesentation
-
         :return: String Repraesentation - "Fraction(numerator, denominator)"
+        >>> repr(Fraction(3, 4))
+        'Fraction(3, 4)'
+        >>> repr(Fraction(-2, 5))
+        'Fraction(-2, 5)'
         """
         return f"{self.__class__.__name__}({self._numerator}, {self._denominator})"
 
@@ -169,14 +208,7 @@ class Fraction:
         if isinstance(other, Fraction):
             return (self - other).numerator < 0
         return NotImplemented
-    
+
 
 if __name__ == "__main__":
-    f1 = Fraction(1, 2)
-    f2 = Fraction(-2, 3)
-    print(f1)
-    print(f2)
-    print(f1 + f2)
-    print(f1 - f2)
-    print(f1 * f2)
-    print(f1 / f2)
+    doctest.testmod(verbose=True)
