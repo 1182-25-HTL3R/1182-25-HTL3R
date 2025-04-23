@@ -46,15 +46,20 @@ class Fraction:
         """
         return self._numerator
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         erstellt eine sinnvolle Representation eines Bruchs
         :return: String Representation eines Bruchs
         """
-        if self.denominator == 1:
-            return str(self.numerator)
 
-        return str(self.numerator) + "/" + str(self.denominator)
+        num, den = self._numerator, self._denominator
+        if den == 1:
+            return str(num)
+
+        if abs(num) > den:
+            return f"{num // den} {abs(num) % den}/{den}"
+
+        return f"{num}/{den}"
 
     def __add__(self, other):
         """
