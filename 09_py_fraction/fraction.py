@@ -1,6 +1,7 @@
+import functools
 import math
 
-
+@functools.total_ordering
 class Fraction:
     """
     Representiert einen Bruch mit Nenner (numerator) und Zähler (denominator)
@@ -86,7 +87,7 @@ class Fraction:
         """
         if isinstance(other, int):
             return Fraction(other) + self
-        return Exception
+        return NotImplemented
 
     def __sub__(self, other):
         """
@@ -99,13 +100,13 @@ class Fraction:
 
     def __rsub__(self, other):
         """
-        subtrahiert eine Zahl von einem Bruch
+        subtrahiert eine Zahl mit einem Bruch
         :param other: Zahl
         :return: subtrahierter Bruch
         """
         if isinstance(other, int):
             return Fraction(other) - self
-        return Exception
+        return NotImplemented
 
     def __mul__(self, other):
         """
@@ -123,7 +124,7 @@ class Fraction:
         """
         if isinstance(other, int):
             return Fraction(other) * self
-        return Exception
+        return NotImplemented
 
     def __truediv__(self, other):
         """
@@ -131,7 +132,19 @@ class Fraction:
         :param other: anderer Bruch
         :return: dividierter Bruch
         """
-        return Fraction(self.numerator * other.denominator, self.denominator * other.numerator)
+        if other.numerator == 0:
+            raise ArithmeticError("Nenner darf nicht 0 sein.")
+        return Fraction(self._numerator * other.denominator, self._denominator * other.numerator)
+
+    def __rtruediv__(self, other):
+        """
+        dividiert eine Zahl mit einem Bruch
+        :param other: Zahl
+        :return: dividierter Bruch
+        """
+        if isinstance(other, int):
+            return Fraction(other) / self
+        return NotImplemented
 
 
 if __name__ == "__main__":
