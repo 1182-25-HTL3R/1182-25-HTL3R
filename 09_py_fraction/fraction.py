@@ -2,6 +2,7 @@ import doctest
 import functools
 import math
 
+
 @functools.total_ordering
 class Fraction:
     """
@@ -121,8 +122,12 @@ class Fraction:
         >>> 1 + Fraction(1, 2)
         Fraction(3, 2)
         """
-        return Fraction(self._numerator * other.denominator + self._denominator * other.numerator,
-            self._denominator * other.denominator)
+        if isinstance(other, int):
+            other = Fraction(other)
+        if isinstance(other, Fraction):
+            return Fraction(self._numerator * other.denominator + self._denominator * other.numerator,
+                            self._denominator * other.denominator)
+        return NotImplemented
 
     def __radd__(self, other):
         """
@@ -150,8 +155,12 @@ class Fraction:
         >>> 1 - Fraction(1, 4)
         Fraction(3, 4)
         """
-        return Fraction(self._numerator * other.denominator - self._denominator * other.numerator,
-                        self._denominator * other.denominator)
+        if isinstance(other, int):
+            other = Fraction(other)
+        if isinstance(other, Fraction):
+            return Fraction(self._numerator * other.denominator - self._denominator * other.numerator,
+                            self._denominator * other.denominator)
+        return NotImplemented
 
     def __rsub__(self, other):
         """
@@ -179,7 +188,11 @@ class Fraction:
         >>> 3 * Fraction(2, 3)
         Fraction(2, 1)
         """
-        return Fraction(self._numerator * other.numerator, self._denominator * other.denominator)
+        if isinstance(other, int):
+            other = Fraction(other)
+        if isinstance(other, Fraction):
+            return Fraction(self._numerator * other.numerator, self._denominator * other.denominator)
+        return NotImplemented
 
     def __rmul__(self, other):
         """
@@ -210,9 +223,13 @@ class Fraction:
         ...     print("ArithmeticError")
         ArithmeticError
         """
-        if other.numerator == 0:
-            raise ArithmeticError("Nenner darf nicht 0 sein.")
-        return Fraction(self._numerator * other.denominator, self._denominator * other.numerator)
+        if isinstance(other, int):
+            other = Fraction(other)
+        if isinstance(other, Fraction):
+            if other.numerator == 0:
+                raise ArithmeticError("Nenner darf nicht 0 sein.")
+            return Fraction(self._numerator * other.denominator, self._denominator * other.numerator)
+        return NotImplemented
 
     def __rtruediv__(self, other):
         """
