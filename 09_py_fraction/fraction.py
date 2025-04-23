@@ -61,6 +61,14 @@ class Fraction:
 
         return f"{num}/{den}"
 
+    def __repr__(self) -> str:
+        """
+        Offizielle String-Repraesentation
+
+        :return: String Repraesentation - "Fraction(numerator, denominator)"
+        """
+        return f"{self.__class__.__name__}({self._numerator}, {self._denominator})"
+    
     def __add__(self, other):
         """
         addiert zwei Brüche
