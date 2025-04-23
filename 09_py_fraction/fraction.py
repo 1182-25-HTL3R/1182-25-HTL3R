@@ -158,6 +158,18 @@ class Fraction:
             return self._numerator == other.numerator and self._denominator == other.denominator
         return NotImplemented
 
+    def __lt__(self, other):
+        """
+        kleiner-als-Vergleich mit Zahl oder Bruch
+        :param other: Zahl oder Bruch
+        :return: Ergebnis des Vergleichs - true or false
+        """
+        if isinstance(other, int):
+            other = Fraction(other)
+        if isinstance(other, Fraction):
+            return (self - other).numerator < 0
+        return NotImplemented
+    
 
 if __name__ == "__main__":
     f1 = Fraction(1, 2)
