@@ -113,7 +113,17 @@ class Fraction:
         :param other: anderer Bruch
         :return: multiplizierter Bruch
         """
-        return Fraction(self.numerator * other.numerator, self.denominator * other.denominator)
+        return Fraction(self._numerator * other.numerator, self._denominator * other.denominator)
+
+    def __rmul__(self, other):
+        """
+        multipliziert eine Zahl mit einem Bruch
+        :param other: Zahl
+        :return: multiplizierter Bruch
+        """
+        if isinstance(other, int):
+            return Fraction(other) * self
+        return Exception
 
     def __truediv__(self, other):
         """
