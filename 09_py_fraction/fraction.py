@@ -264,6 +264,17 @@ class Fraction:
             return (self - other).numerator < 0
         return NotImplemented
 
+    def __float__(self) -> float:
+        """
+        wandelt Bruch in float um
+        :return: Bruch als float
+        >>> float(Fraction(1, 2))
+        0.5
+        >>> float(Fraction(-3, 4))
+        -0.75
+        """
+        return self._numerator / self._denominator
+
 
 if __name__ == "__main__":
     doctest.testmod(verbose=True)
