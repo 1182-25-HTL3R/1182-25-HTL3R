@@ -28,6 +28,24 @@ class Fraction:
             self._numerator = int(-numerator / gcd)
             self._denominator = int(-denominator / gcd)
 
+    @property
+    def numerator(self) -> int:
+        """
+        Gibt den Zähler des Bruchs zurück
+
+        :return: Zähler
+        """
+        return self._numerator
+
+    @property
+    def denominator(self) -> int:
+        """
+        Gibt den Nenner des Bruchs zurück
+
+        :return: Nenner
+        """
+        return self._numerator
+
     def __str__(self):
         """
         erstellt eine sinnvolle Representation eines Bruchs
