@@ -4,25 +4,29 @@ import math
 class Fraction:
     """
     Representiert einen Bruch mit Nenner (numerator) und Zähler (denominator)
+
+    Attributes:
+        _numerator: Zähler des Bruchs
+        _denominator: Nenner des Bruchs
     """
 
-    def __init__(self, numerator: int, denominator: int):
+    def __init__(self, numerator: int = 0, denominator: int = 1):
         """
         Konstruktor für einen Bruch
-        :param numerator: Nenner
-        :param denominator: Zähler
+        :param numerator: Zähler
+        :param denominator: Nenner
         """
         gcd = math.gcd(numerator, denominator)
 
         if denominator > 0:
-            self.numerator = int(numerator / gcd)
-            self.denominator = int(denominator / gcd)
+            self._numerator = int(numerator / gcd)
+            self._denominator = int(denominator / gcd)
         else:
             if denominator == 0:
-                raise ZeroDivisionError
+                raise ArithmeticError("Nenner darf nicht 0 sein.")
 
-            self.numerator = int(-numerator / gcd)
-            self.denominator = int(-denominator / gcd)
+            self._numerator = int(-numerator / gcd)
+            self._denominator = int(-denominator / gcd)
 
     def __str__(self):
         """
