@@ -44,7 +44,7 @@ class Fraction:
 
         :return: Nenner
         """
-        return self._numerator
+        return self._denominator
 
     def __str__(self) -> str:
         """
@@ -68,15 +68,23 @@ class Fraction:
         :return: String Repraesentation - "Fraction(numerator, denominator)"
         """
         return f"{self.__class__.__name__}({self._numerator}, {self._denominator})"
-    
+
     def __add__(self, other):
         """
         addiert zwei Brüche
         :param other: anderer Bruch
         :return: addierter Bruch
         """
-        return Fraction(self.numerator * other.denominator + self.denominator * other.numerator,
-                        self.denominator * other.denominator)
+        return Fraction(self._numerator * other.denominator + self._denominator * other.numerator,
+            self._denominator * other.denominator)
+
+    def __radd__(self, other):
+        """
+        addiert eine Zahl mit einem Bruch
+        :param other: Zahl
+        :return: addierter Bruch
+        """
+        return Fraction(other) + self
 
     def __sub__(self, other):
         """
