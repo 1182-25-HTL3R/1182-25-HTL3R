@@ -114,6 +114,12 @@ class Fraction:
         addiert zwei Brüche
         :param other: anderer Bruch
         :return: addierter Bruch
+        >>> Fraction(1, 2) + Fraction(1, 3)
+        Fraction(5, 6)
+        >>> Fraction(1, 2) + 1
+        Fraction(3, 2)
+        >>> 1 + Fraction(1, 2)
+        Fraction(3, 2)
         """
         return Fraction(self._numerator * other.denominator + self._denominator * other.numerator,
             self._denominator * other.denominator)
@@ -123,6 +129,10 @@ class Fraction:
         addiert eine Zahl mit einem Bruch
         :param other: Zahl
         :return: addierter Bruch
+        >>> 1 + Fraction(3, 4)
+        Fraction(7, 4)
+        >>> 1 + Fraction(1, 2)
+        Fraction(3, 2)
         """
         if isinstance(other, int):
             return Fraction(other) + self
@@ -133,6 +143,12 @@ class Fraction:
         subtrahiert zwei Brüche
         :param other: anderer Bruch
         :return: subtrahierter Bruch
+        >>> Fraction(3, 4) - Fraction(1, 4)
+        Fraction(1, 2)
+        >>> Fraction(1, 4) - 1
+        Fraction(-3, 4)
+        >>> 1 - Fraction(1, 4)
+        Fraction(3, 4)
         """
         return Fraction(self._numerator * other.denominator - self._denominator * other.numerator,
                         self._denominator * other.denominator)
@@ -142,6 +158,10 @@ class Fraction:
         subtrahiert eine Zahl mit einem Bruch
         :param other: Zahl
         :return: subtrahierter Bruch
+        >>> 1 - Fraction(1, 2)
+        Fraction(1, 2)
+        >>> 1 - Fraction(1, 4)
+        Fraction(3, 4)
         """
         if isinstance(other, int):
             return Fraction(other) - self
@@ -152,6 +172,12 @@ class Fraction:
         multipliziert zwei Brüche
         :param other: anderer Bruch
         :return: multiplizierter Bruch
+        >>> Fraction(2, 3) * Fraction(3, 4)
+        Fraction(1, 2)
+        >>> Fraction(2, 3) * 3
+        Fraction(2, 1)
+        >>> 3 * Fraction(2, 3)
+        Fraction(2, 1)
         """
         return Fraction(self._numerator * other.numerator, self._denominator * other.denominator)
 
@@ -160,6 +186,10 @@ class Fraction:
         multipliziert eine Zahl mit einem Bruch
         :param other: Zahl
         :return: multiplizierter Bruch
+        >>> 2 * Fraction(3, 4)
+        Fraction(3, 2)
+        >>> 3 * Fraction(2, 3)
+        Fraction(2, 1)
         """
         if isinstance(other, int):
             return Fraction(other) * self
@@ -170,6 +200,15 @@ class Fraction:
         dividiert zwei Brüche
         :param other: anderer Bruch
         :return: dividierter Bruch
+        >>> Fraction(3, 4) / Fraction(3, 2)
+        Fraction(1, 2)
+        >>> Fraction(3, 4) / 2
+        Fraction(3, 8)
+        >>> try:
+        ...     Fraction(1, 2) / Fraction(0, 1)
+        ... except ArithmeticError:
+        ...     print("ArithmeticError")
+        ArithmeticError
         """
         if other.numerator == 0:
             raise ArithmeticError("Nenner darf nicht 0 sein.")
@@ -180,6 +219,10 @@ class Fraction:
         dividiert eine Zahl mit einem Bruch
         :param other: Zahl
         :return: dividierter Bruch
+        >>> 3 / Fraction(2, 3)
+        Fraction(9, 2)
+        >>> 1 / Fraction(1, 2)
+        Fraction(2, 1)
         """
         if isinstance(other, int):
             return Fraction(other) / self
@@ -190,6 +233,12 @@ class Fraction:
         vergleicht auf Gleichheit
         :param other: Zahl oder Bruch
         :return: Ergebnis des Vergleichs - true or false
+        >>> Fraction(1, 2) == Fraction(2, 4)
+        True
+        >>> Fraction(3, 7) == Fraction(10, 7).__sub__(1)
+        True
+        >>> Fraction(1, 2) != Fraction(1)
+        True
         """
         if isinstance(other, int):
             return self == Fraction(other)
@@ -202,6 +251,12 @@ class Fraction:
         kleiner-als-Vergleich mit Zahl oder Bruch
         :param other: Zahl oder Bruch
         :return: Ergebnis des Vergleichs - true or false
+        >>> Fraction(1, 3) < Fraction(1, 2)
+        True
+        >>> Fraction(1, 2) < 1
+        True
+        >>> Fraction(3, 2) < 1
+        False
         """
         if isinstance(other, int):
             other = Fraction(other)
