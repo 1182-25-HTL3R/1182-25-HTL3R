@@ -1,7 +1,8 @@
 import os
 import sys
 import argparse
-
+import pandas as pd
+import re
 
 def file_exists(path):
     if not os.path.exists(path):
@@ -16,6 +17,15 @@ def file_exists(path):
         sys.exit(i)
     return True
 
+def read_xml(filename: str) -> pd.DataFrame:
+    file_exists(filename)
+    with open(filename, "r", encoding="utf-8") as f:
+        content = f.read
+
+    pattern = re.compile(r"<Schueler>.*?<Nummer>(\d+)</Nummer>.*?<Anrede>(.*?)</Anrede>.*?<Vorname>(.*?)</Vorname>.*?<Nachname>(.*?)</Nachname>.*?<Geburtsdatum>(.*?)</Geburtsdatum>.*?</Schueler>", re.DOTALL)
+    result = re.findall(pattern, content)
+
+    return pd.DataFrame(result, columns=["Nummer", "Anrede", "Vorname", "Nachname", "Geburtsdatum"], dtype=str)
 
 def main():
     parser = argparse.ArgumentParser(description="noten.py by Fabian Ha / HTL Rennweg")
