@@ -4,6 +4,7 @@ import argparse
 import pandas as pd
 import re
 
+
 def file_exists(path):
     if not os.path.exists(path):
         i = 2
@@ -17,6 +18,7 @@ def file_exists(path):
         sys.exit(i)
     return True
 
+
 def read_xml(filename: str) -> pd.DataFrame:
     file_exists(filename)
     with open(filename, "r", encoding="utf-8") as f:
@@ -26,6 +28,10 @@ def read_xml(filename: str) -> pd.DataFrame:
     result = re.findall(pattern, content)
 
     return pd.DataFrame(result, columns=["Nummer", "Anrede", "Vorname", "Nachname", "Geburtsdatum"], dtype=str)
+
+def read_csv(filename: str) -> pd.DataFrame:
+    file_exists(filename)
+    return pd.read_csv(filename)
 
 def main():
     parser = argparse.ArgumentParser(description="noten.py by Fabian Ha / HTL Rennweg")
@@ -39,6 +45,8 @@ def main():
     m.add_argument("-q", "--quiet", store_true=True, help="keine Textausgabe")
     args = parser.parse_args()
 
+    df_xml = read_xml(args.s)
+    df_csv = read_csv(args.n)
 
 if __name__ == '__main__':
     main()
