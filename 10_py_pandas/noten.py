@@ -89,9 +89,10 @@ def main() -> None:
     df_joined.to_csv(args.outfile, index=False)
 
     if args.verbose and not args.quiet:
-        sys.stdout.write(f"csv-Datei mit den Noten : {args.n}")
-        sys.stdout.write(f"xml-Datei mit den Schülerdaten : {args.s}")
-        sys.stdout.write(f"Name der Spalte, die zu verknüpfen ist : {args.m}")
+        sys.stdout.write("python " + " ".join(sys.argv))
+        sys.stdout.write(f"\ncsv-Datei mit den Noten : {args.n}\n")
+        sys.stdout.write(f"xml-Datei mit den Schülerdaten : {args.s}\n")
+        sys.stdout.write(f"Name der Spalte, die zu verknüpfen ist : {args.m}\n")
         sys.stdout.write(f"Output-Datei : {args.outfile}")
 
 
