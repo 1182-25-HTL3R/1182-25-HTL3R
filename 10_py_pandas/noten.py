@@ -48,5 +48,18 @@ def main():
     df_xml = read_xml(args.s)
     df_csv = read_csv(args.n)
 
+    df_xml.set_index(args.m, inplace=True)
+    df_csv.set_index(args.m, inplace=True)
+
+    df_joined = df_xml.join(df_csv)
+    df_joined.reset_index(inplace=True)
+
+    if args.f:
+        subjects = args.f.split(",")
+        cols = ["Nummer", "Anrede", "Vorname", "Nachname", "Geburtsdatum"] + subjects
+        df_joined = df_joined[cols]
+        if len(subjects) > 1: # es gibt mehr als 1 Fach -> BONUS: Spalte Schnitt wird erstellt
+            df_joined["Schnitt"] = df_joined[subjects].astype(float).mean(axis=1).round(2)
+
 if __name__ == '__main__':
     main()
