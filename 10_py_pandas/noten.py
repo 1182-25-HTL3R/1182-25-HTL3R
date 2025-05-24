@@ -66,8 +66,8 @@ def main() -> None:
     parser.add_argument("-m", help="Name der Spalte, die zu verknüpfen ist (default = Nummer)")
     parser.add_argument("-f", help="Name des zu filternden Gegenstandes (z.B. SEW)")
     m = parser.add_mutually_exclusive_group(required=False)
-    m.add_argument("-v", "--verbose", store_true=True, help="Gibt die Daten Kommandozeile")
-    m.add_argument("-q", "--quiet", store_true=True, help="keine Textausgabe")
+    m.add_argument("-v", "--verbose", action="store_true", help="Gibt die Daten Kommandozeile")
+    m.add_argument("-q", "--quiet", action="store_true", help="keine Textausgabe")
     args = parser.parse_args()
 
     df_xml = read_xml(args.s)
