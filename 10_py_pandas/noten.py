@@ -1,3 +1,5 @@
+__author__ = "Fabian Ha, 4CN"
+
 import os
 import sys
 import argparse
@@ -6,6 +8,12 @@ import re
 
 
 def file_exists(path):
+    """
+    Prüft ob die Datei existiert und ob der angegebene Pfad ein gültiger ist.
+    Gibt standardisierte Fehlermeldungen in stderr aus.
+    :param path: Pfad zur Datei
+    :return: True wenn Datei existiert und gültig ist, False wenn nicht
+    """
     if not os.path.exists(path):
         i = 2
         error = os.strerror(i)
@@ -20,20 +28,37 @@ def file_exists(path):
 
 
 def read_xml(filename: str) -> pd.DataFrame:
+    """
+    Liste eine XML-Datei ein und extrahiert die relevanten Felder als DataFrame
+    :param filename: Dateiname zu der XML-Datei
+    :return: extrahierte Felder in einem DataFrame
+    """
     file_exists(filename)
     with open(filename, "r", encoding="utf-8") as f:
         content = f.read
 
-    pattern = re.compile(r"<Schueler>.*?<Nummer>(\d+)</Nummer>.*?<Anrede>(.*?)</Anrede>.*?<Vorname>(.*?)</Vorname>.*?<Nachname>(.*?)</Nachname>.*?<Geburtsdatum>(.*?)</Geburtsdatum>.*?</Schueler>", re.DOTALL)
+    pattern = re.compile(
+        r"<Schueler>.*?<Nummer>(\d+)</Nummer>.*?<Anrede>(.*?)</Anrede>.*?<Vorname>(.*?)</Vorname>.*?<Nachname>(.*?)</Nachname>.*?<Geburtsdatum>(.*?)</Geburtsdatum>.*?</Schueler>",
+        re.DOTALL)
     result = re.findall(pattern, content)
 
     return pd.DataFrame(result, columns=["Nummer", "Anrede", "Vorname", "Nachname", "Geburtsdatum"], dtype=str)
 
+
 def read_csv(filename: str) -> pd.DataFrame:
+    """
+    List eine CSV-Datei mit Notendaten ein
+    :param filename: Dateiname der CSV-Datei
+    :return: extrahierte Felder in einem DataFrame
+    """
     file_exists(filename)
     return pd.read_csv(filename)
 
-def main():
+
+def main() -> None:
+    """
+    Hauptfunktion des Programms.
+    """
     parser = argparse.ArgumentParser(description="noten.py by Fabian Ha / HTL Rennweg")
     parser.add_argument("outfile", help="Ausgabedatei (z.B. result.csv)")
     parser.add_argument("-n", help="csv-Datei mit den Noten")
@@ -58,7 +83,7 @@ def main():
         subjects = args.f.split(",")
         cols = ["Nummer", "Anrede", "Vorname", "Nachname", "Geburtsdatum"] + subjects
         df_joined = df_joined[cols]
-        if len(subjects) > 1: # es gibt mehr als 1 Fach -> BONUS: Spalte Schnitt wird erstellt
+        if len(subjects) > 1:  # es gibt mehr als 1 Fach -> BONUS: Spalte Schnitt wird erstellt
             df_joined["Schnitt"] = df_joined[subjects].astype(float).mean(axis=1).round(2)
 
     df_joined.to_csv(args.outfile, index=False)
@@ -68,6 +93,7 @@ def main():
         sys.stdout.write(f"xml-Datei mit den Schülerdaten : {args.s}")
         sys.stdout.write(f"Name der Spalte, die zu verknüpfen ist : {args.m}")
         sys.stdout.write(f"Output-Datei : {args.outfile}")
+
 
 if __name__ == '__main__':
     main()
