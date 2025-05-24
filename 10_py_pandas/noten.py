@@ -73,6 +73,8 @@ def main() -> None:
     df_xml = read_xml(args.s)
     df_csv = read_csv(args.n)
 
+    df_xml[args.m] = df_xml[args.m].astype(str)
+    df_csv[args.m] = df_csv[args.m].astype(str)
     df_xml.set_index(args.m, inplace=True)
     df_csv.set_index(args.m, inplace=True)
 
