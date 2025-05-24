@@ -35,7 +35,7 @@ def read_xml(filename: str) -> pd.DataFrame:
     """
     file_exists(filename)
     with open(filename, "r", encoding="utf-8") as f:
-        content = f.read
+        content = f.read()
 
     pattern = re.compile(
         r"<Schueler>.*?<Nummer>(\d+)</Nummer>.*?<Anrede>(.*?)</Anrede>.*?<Vorname>(.*?)</Vorname>.*?<Nachname>(.*?)</Nachname>.*?<Geburtsdatum>(.*?)</Geburtsdatum>.*?</Schueler>",
