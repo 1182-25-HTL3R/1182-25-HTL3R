@@ -61,5 +61,13 @@ def main():
         if len(subjects) > 1: # es gibt mehr als 1 Fach -> BONUS: Spalte Schnitt wird erstellt
             df_joined["Schnitt"] = df_joined[subjects].astype(float).mean(axis=1).round(2)
 
+    df_joined.to_csv(args.outfile, index=False)
+
+    if args.verbose and not args.quiet:
+        sys.stdout.write(f"csv-Datei mit den Noten : {args.n}")
+        sys.stdout.write(f"xml-Datei mit den Schülerdaten : {args.s}")
+        sys.stdout.write(f"Name der Spalte, die zu verknüpfen ist : {args.m}")
+        sys.stdout.write(f"Output-Datei : {args.outfile}")
+
 if __name__ == '__main__':
     main()
