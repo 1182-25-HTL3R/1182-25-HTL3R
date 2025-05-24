@@ -52,7 +52,7 @@ def read_csv(filename: str) -> pd.DataFrame:
     :return: extrahierte Felder in einem DataFrame
     """
     file_exists(filename)
-    return pd.read_csv(filename)
+    return pd.read_csv(filename, sep=";")
 
 
 def main() -> None:
@@ -63,7 +63,7 @@ def main() -> None:
     parser.add_argument("outfile", help="Ausgabedatei (z.B. result.csv)")
     parser.add_argument("-n", help="csv-Datei mit den Noten")
     parser.add_argument("-s", help="xml-Datei mit den Schülerdaten")
-    parser.add_argument("-m", help="Name der Spalte, die zu verknüpfen ist (default = Nummer)")
+    parser.add_argument("-m", default="Nummer", help="Name der Spalte, die zu verknüpfen ist (default = Nummer)")
     parser.add_argument("-f", help="Name des zu filternden Gegenstandes (z.B. SEW)")
     m = parser.add_mutually_exclusive_group(required=False)
     m.add_argument("-v", "--verbose", action="store_true", help="Gibt die Daten Kommandozeile")
